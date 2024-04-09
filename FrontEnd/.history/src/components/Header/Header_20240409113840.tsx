@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
-import 'src/Styles/Header.scss'
+import './Header.scss'
 function Header() {
   return (
     <header className='font'>
@@ -70,7 +70,7 @@ function Header() {
             </div>
           </div>
           <div className='flex-grow-1'>
-            <div className='flex flex-wrap gap-2 border-2 text-gray-500  border-orange-400 rounded-lg p-2 py-1 hover:text-gray-300 cursor-pointer items-center'>
+            <div className='flex flex-wrap gap-2 border-2 text-gray-600  border-orange-400 rounded-lg p-2 py-1 hover:text-gray-300 cursor-pointer items-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'

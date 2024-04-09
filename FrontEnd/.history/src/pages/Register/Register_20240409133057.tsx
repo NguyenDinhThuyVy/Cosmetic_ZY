@@ -20,7 +20,6 @@ export default function Register() {
   })
   const onSubmit = handleSubmit((data) => {
     const body = omit(data, ['confirm_password'])
-    console.log(body)
     registerAccountMutation.mutate(body, {
       onSuccess: (data) => {
         console.log(data)

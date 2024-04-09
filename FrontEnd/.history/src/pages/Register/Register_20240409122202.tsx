@@ -1,34 +1,30 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { schema, Schema } from 'src/utils/rules'
+import { getRules } from 'src/utils/rules'
 import Input from 'src/components/Input'
-import { useMutation } from 'react-query'
-import { omit } from 'lodash'
-import { registerAccount } from 'src/apis/auth.api'
-type FormData = Schema
+
+interface FormData {
+  email: string
+  password: string
+  confirm_password: string
+}
 export default function Register() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
-  } = useForm<FormData>({
-    resolver: yupResolver(schema)
-  })
-  const registerAccountMutation = useMutation({
-    mutationFn: (body: Omit<FormData, 'confirm_password'>) => registerAccount(body)
-  })
-  const onSubmit = handleSubmit((data) => {
-    const body = omit(data, ['confirm_password'])
-    console.log(body)
-    registerAccountMutation.mutate(body, {
-      onSuccess: (data) => {
-        console.log(data)
-      }
-    })
-  })
-  // const value = watch()
-  // console.log(value)
+  } = useForm<FormData>()
+  const rules = getRules(getValues)
+  const onSubmit = handleSubmit(
+    (data) => {
+      // console.log(data)
+    },
+    (data) => {
+      const password = getValues('password')
+      // console.log(password)
+    }
+  )
   return (
     <div className='bg-yellow pt-8'>
       <div className='h-[683px]'>
@@ -51,26 +47,31 @@ export default function Register() {
                   className='mt-8'
                   errorMessage={errors.email?.message}
                   placeholder='Email'
+                  rules={rules.email}
                 />
-                <Input
-                  name='password'
-                  register={register}
-                  type='password'
-                  className='mt-2'
-                  errorMessage={errors.password?.message}
-                  placeholder='Password'
-                  autoComplete='on'
-                />
-
-                <Input
-                  name='confirm_password'
-                  register={register}
-                  type='password'
-                  className='mt-2'
-                  errorMessage={errors.confirm_password?.message}
-                  placeholder='Confirm Password'
-                  autoComplete='on'
-                />
+                <div className='mt-2'>
+                  <input
+                    type='password'
+                    {...register('password', rules.password)}
+                    className='p-3 w-full outline-none border border-gray-300 focus:border-gray-400 rounded-lg focus:shadow-sm place'
+                    placeholder='Password'
+                  />
+                  <div className='mt-1 text-red-400 min-h-[1.25rem] text-sm pl-1'></div>
+                </div>
+                <div className='mt-2'>
+                  <input
+                    type='password'
+                    autoComplete='on'
+                    {...register('confirm_password', {
+                      ...rules.confirm_password
+                    })}
+                    className='p-3 w-full outline-none border border-gray-300 focus:border-gray-400 rounded-lg focus:shadow-sm place'
+                    placeholder='Confirm Password'
+                  />
+                  <div className='mt-1 text-red-400 min-h-[1.25rem] text-sm pl-1'>
+                    {errors.confirm_password?.message}
+                  </div>
+                </div>
                 <div className='mt-3'>
                   <button className='w-full text-center py-4 border rounded-lg  px-2 uppercase bg-pink_3 text-white text-sm hover:bg-pink_3/90'>
                     Đăng Ký

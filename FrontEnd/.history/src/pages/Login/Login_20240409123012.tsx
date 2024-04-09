@@ -5,15 +5,18 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { schema, Schema } from 'src/utils/rules'
 import Input from 'src/components/Input'
 
-type FormData = Schema
+interface FormData {
+  email: string
+  password: string
+}
 export default function Login() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
-  } = useForm<FormData>({
-    resolver: yupResolver(schema)
-  })
+  } = useForm<FormData>()
+  const rules = getRules(getValues)
   const onSubmit = handleSubmit((data) => {
     console.log(data)
   })
@@ -29,7 +32,7 @@ export default function Login() {
               />
             </div>
             <div className='lg:col-span-2 lg:col-start-4 place-content-center '>
-              <form className='p-10 roundedshadow-sm' onSubmit={onSubmit} noValidate>
+              <form className='p-10 roundedshadow-sm'>
                 <div className='text-4xl text'>Đăng nhập</div>
                 <Input
                   name='email'
@@ -38,6 +41,7 @@ export default function Login() {
                   className='mt-8'
                   errorMessage={errors.email?.message}
                   placeholder='Email'
+                  rules={rules.email}
                 />
                 <Input
                   name='password'
@@ -46,6 +50,7 @@ export default function Login() {
                   className='mt-2'
                   errorMessage={errors.password?.message}
                   placeholder='Password'
+                  rules={rules.password}
                   autoComplete='on'
                 />
                 <div className='mt-2'>

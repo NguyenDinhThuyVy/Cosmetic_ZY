@@ -29,7 +29,7 @@ export default function Login() {
               />
             </div>
             <div className='lg:col-span-2 lg:col-start-4 place-content-center '>
-              <form className='p-10 roundedshadow-sm' onSubmit={onSubmit} noValidate>
+              <form className='p-10 roundedshadow-sm'>
                 <div className='text-4xl text'>Đăng nhập</div>
                 <Input
                   name='email'

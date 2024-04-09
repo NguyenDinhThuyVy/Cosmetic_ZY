@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
-import 'src/Styles/Header.scss'
+import './Header.scss'
 function Header() {
   return (
     <header className='font'>
@@ -61,7 +61,7 @@ function Header() {
               <img
                 src='https://bizweb.dktcdn.net/100/426/076/themes/896300/assets/phone_icon.png?1692086228721'
                 alt=''
-                className='h-[30px] w-[30px] mt-1'
+                className='h-[32px] w-[32px] mt-1'
               />
               <div className='flex flex-col '>
                 <span className='text-gray-500'>Hỗ trợ khách hàng</span>
@@ -70,7 +70,7 @@ function Header() {
             </div>
           </div>
           <div className='flex-grow-1'>
-            <div className='flex flex-wrap gap-2 border-2 text-gray-500  border-orange-400 rounded-lg p-2 py-1 hover:text-gray-300 cursor-pointer items-center'>
+            <div className='flex flex-wrap gap-2 border-2 text-gray-600  border-orange-400 rounded-lg p-2 py-1 hover:text-gray-300 cursor-pointer items-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'

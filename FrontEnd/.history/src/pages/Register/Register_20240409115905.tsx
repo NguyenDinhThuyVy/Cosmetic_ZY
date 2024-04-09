@@ -1,34 +1,22 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { schema, Schema } from 'src/utils/rules'
-import Input from 'src/components/Input'
-import { useMutation } from 'react-query'
-import { omit } from 'lodash'
-import { registerAccount } from 'src/apis/auth.api'
-type FormData = Schema
+import { rules } from 'src/utils/rules'
+
+interface FormData {
+  email: string
+  password: string
+  confirm_password: string
+}
 export default function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormData>({
-    resolver: yupResolver(schema)
-  })
-  const registerAccountMutation = useMutation({
-    mutationFn: (body: Omit<FormData, 'confirm_password'>) => registerAccount(body)
-  })
+  } = useForm<FormData>()
+
   const onSubmit = handleSubmit((data) => {
-    const body = omit(data, ['confirm_password'])
-    console.log(body)
-    registerAccountMutation.mutate(body, {
-      onSuccess: (data) => {
-        console.log(data)
-      }
-    })
+    // console.log(data)
   })
-  // const value = watch()
-  // console.log(value)
   return (
     <div className='bg-yellow pt-8'>
       <div className='h-[683px]'>
@@ -44,33 +32,33 @@ export default function Register() {
             <div className='lg:col-span-2 lg:col-start-4 place-content-center '>
               <form className='p-10 roundedshadow-sm' onSubmit={onSubmit} noValidate>
                 <div className='text-4xl text'>Đăng Ký</div>
-                <Input
-                  name='email'
-                  register={register}
-                  type='email'
-                  className='mt-8'
-                  errorMessage={errors.email?.message}
-                  placeholder='Email'
-                />
-                <Input
-                  name='password'
-                  register={register}
-                  type='password'
-                  className='mt-2'
-                  errorMessage={errors.password?.message}
-                  placeholder='Password'
-                  autoComplete='on'
-                />
-
-                <Input
-                  name='confirm_password'
-                  register={register}
-                  type='password'
-                  className='mt-2'
-                  errorMessage={errors.confirm_password?.message}
-                  placeholder='Confirm Password'
-                  autoComplete='on'
-                />
+                <div className='mt-8'>
+                  <input
+                    type='email'
+                    {...register('email', rules.email)}
+                    className='p-3 w-full outline-none border border-gray-300 focus:border-gray-400 rounded-lg focus:shadow-sm place '
+                    placeholder='Email'
+                  />
+                  <div className='mt-1 text-red-600 min-h-[1.25rem] text-sm'>{errors.password?.message}</div>
+                </div>
+                <div className='mt-3'>
+                  <input
+                    type='password'
+                    name='password'
+                    className='p-3 w-full outline-none border border-gray-300 focus:border-gray-400 rounded-lg focus:shadow-sm place'
+                    placeholder='Password'
+                  />
+                  <div className='mt-1 text-red-600 min-h-[1rem] text-sm'></div>
+                </div>
+                <div className='mt-3'>
+                  <input
+                    type='password'
+                    name='confirm password'
+                    className='p-3 w-full outline-none border border-gray-300 focus:border-gray-400 rounded-lg focus:shadow-sm place'
+                    placeholder='Confirm Password'
+                  />
+                  <div className='mt-1 text-red-600 min-h-[1rem] text-sm'></div>
+                </div>
                 <div className='mt-3'>
                   <button className='w-full text-center py-4 border rounded-lg  px-2 uppercase bg-pink_3 text-white text-sm hover:bg-pink_3/90'>
                     Đăng Ký

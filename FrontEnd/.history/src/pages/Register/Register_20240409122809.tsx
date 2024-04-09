@@ -3,32 +3,29 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema, Schema } from 'src/utils/rules'
 import Input from 'src/components/Input'
-import { useMutation } from 'react-query'
-import { omit } from 'lodash'
-import { registerAccount } from 'src/apis/auth.api'
-type FormData = Schema
+
+interface FormData {
+  email: string
+  password: string
+  confirm_password: string
+}
 export default function Register() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
-  } = useForm<FormData>({
-    resolver: yupResolver(schema)
-  })
-  const registerAccountMutation = useMutation({
-    mutationFn: (body: Omit<FormData, 'confirm_password'>) => registerAccount(body)
-  })
-  const onSubmit = handleSubmit((data) => {
-    const body = omit(data, ['confirm_password'])
-    console.log(body)
-    registerAccountMutation.mutate(body, {
-      onSuccess: (data) => {
-        console.log(data)
-      }
-    })
-  })
-  // const value = watch()
-  // console.log(value)
+  } = useForm<FormData>()
+  const rules = getRules(getValues)
+  const onSubmit = handleSubmit(
+    (data) => {
+      // console.log(data)
+    },
+    (data) => {
+      const password = getValues('password')
+      // console.log(password)
+    }
+  )
   return (
     <div className='bg-yellow pt-8'>
       <div className='h-[683px]'>
@@ -51,6 +48,7 @@ export default function Register() {
                   className='mt-8'
                   errorMessage={errors.email?.message}
                   placeholder='Email'
+                  rules={rules.email}
                 />
                 <Input
                   name='password'
@@ -59,6 +57,7 @@ export default function Register() {
                   className='mt-2'
                   errorMessage={errors.password?.message}
                   placeholder='Password'
+                  rules={rules.password}
                   autoComplete='on'
                 />
 
@@ -69,6 +68,7 @@ export default function Register() {
                   className='mt-2'
                   errorMessage={errors.confirm_password?.message}
                   placeholder='Confirm Password'
+                  rules={rules.confirm_password}
                   autoComplete='on'
                 />
                 <div className='mt-3'>
