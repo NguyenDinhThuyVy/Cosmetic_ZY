@@ -1,0 +1,5 @@
+function NavHeader() {
+  return <div className='bg-[#e6677c] flex gap-16'>hihi</div>
+}
+
+export default NavHeader
