@@ -23,20 +23,14 @@ module.exports = {
       keyframes: {
         customAnimation: {
           '0%': { transform: 'scale(0.75) rotate(-6deg)' },
-          '25%': { transform: 'scale(1.1) rotate(-6deg)' },
-          '50%': { transform: 'scale(1.1) rotate(6deg)' },
-          '75%': { transform: 'scale(1.1) rotate(-6deg)' },
-          '100%': { transform: 'scale(1.1s) rotate(6deg)' }
-        },
-        Animationcat: {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '25%': { transform: 'translateX(60px))' },
-          '50%': { transform: 'translateX(80px)' }
+          '25%': { transform: 'scale(1.05) rotate(-6deg)' },
+          '50%': { transform: 'scale(1.05) rotate(6deg)' },
+          '75%': { transform: 'scale(1.05) rotate(-6deg)' },
+          '100%': { transform: 'scale(1.05s) rotate(6deg)' }
         }
       },
       animation: {
-        customAnimation: 'customAnimation 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-        Animationcat: 'Animationcat 3s steps(3, end) infinite'
+        customAnimation: 'customAnimation 1.25s linear infinite'
       }
     }
   },

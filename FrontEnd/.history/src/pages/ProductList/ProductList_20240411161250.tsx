@@ -40,10 +40,10 @@ export default function ProductList() {
               <ItemCategory img='category3.webp' name='Sữa Tắm'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category4.webp' name='Kem dưỡng mắt'></ItemCategory>
+              <ItemCategory img='category4.webp' name='Son Kem'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category5.webp' name='Mặt nạ'></ItemCategory>
+              <ItemCategory img='category5.webp' name='Cushion'></ItemCategory>
             </Link>
             <Link to='/'>
               <ItemCategory img='category6.webp' name='Sửa rữa mặt'></ItemCategory>
@@ -55,7 +55,7 @@ export default function ProductList() {
               <ItemCategory img='category8.webp' name='Chống nắng'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category9.webp' name='Dầu gội'></ItemCategory>
+              <ItemCategory img='category8.webp' name='Dầu gội'></ItemCategory>
             </Link>
           </div>
         </div>

@@ -30,13 +30,12 @@ module.exports = {
         },
         Animationcat: {
           '0%, 100%': { transform: 'translateX(0)' },
-          '25%': { transform: 'translateX(60px))' },
-          '50%': { transform: 'translateX(80px)' }
+          '50%': { transform: 'translateX(-80px)' }
         }
       },
       animation: {
         customAnimation: 'customAnimation 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-        Animationcat: 'Animationcat 3s steps(3, end) infinite'
+        Animationcat: 'Animationcat 2.5s cubic-bezier(0, 0, 0.2, 1) infinite'
       }
     }
   },

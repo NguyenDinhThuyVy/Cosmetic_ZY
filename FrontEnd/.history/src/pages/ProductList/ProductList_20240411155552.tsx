@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import ItemCategory from 'src/components/ItemCategory/ItemCategory'
 import Banner from 'src/components/Swiper'
-import 'src/Styles/Footer.scss'
+
 export default function ProductList() {
   return (
-    <div className='h-full flex flex-col font'>
+    <div className='h-full flex flex-col'>
       <div className=' min-h-32'>
         <div className='flex flex-row gap-5 items-center justify-center my-6 mx-32'>
           <div className='flex h-50 w-2/3 items-start text-[8px]  '>
@@ -29,33 +29,30 @@ export default function ProductList() {
               alt='external-cosmetics-professions-woman-diversity-flaticons-lineal-color-flat-icons'
             />
           </div>
-          <div className=' grid grid-cols-9 py-4 place-items-center '>
+          <div className=' grid grid-cols-8 py-4 place-items-center '>
             <Link to='/'>
-              <ItemCategory img='category1.webp' name='Kem dưỡng mặt'></ItemCategory>
+              <ItemCategory img='category1.webp' name='Chăm sóc da'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category2.webp' name='Serum'></ItemCategory>
+              <ItemCategory img='category2.webp' name='Trang điểm'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category3.webp' name='Sữa Tắm'></ItemCategory>
+              <ItemCategory img='category3.webp' name='Chăm sóc da'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category4.webp' name='Kem dưỡng mắt'></ItemCategory>
+              <ItemCategory img='category4.webp' name='Chăm sóc da'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category5.webp' name='Mặt nạ'></ItemCategory>
+              <ItemCategory img='category5.webp' name='Chăm sóc da'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category6.webp' name='Sửa rữa mặt'></ItemCategory>
+              <ItemCategory img='category6.webp' name='Chăm sóc da'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category7.webp' name='Tẩy trang'></ItemCategory>
+              <ItemCategory img='category7.webp' name='Chăm sóc da'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category8.webp' name='Chống nắng'></ItemCategory>
-            </Link>
-            <Link to='/'>
-              <ItemCategory img='category9.webp' name='Dầu gội'></ItemCategory>
+              <ItemCategory img='category8.webp' name='Chăm sóc da'></ItemCategory>
             </Link>
           </div>
         </div>

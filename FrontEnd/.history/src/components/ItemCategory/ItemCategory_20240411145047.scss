@@ -1,0 +1,18 @@
+
+Để thực hiện hiệu ứng xoay trước một ít và sau đó di chuyển qua trái một ít khi di chuột hover, bạn có thể sử dụng @keyframes trong CSS để định nghĩa hiệu ứng chuyển động. Dưới đây là cách bạn có thể thực hiện điều đó:
+
+Đầu tiên, bạn cần tạo một animation trong CSS để thực hiện hiệu ứng xoay trước và di chuyển qua trái. Thêm đoạn mã sau vào tệp CSS của bạn:
+
+css
+Copy code
+@keyframes rotateThenMoveLeft {
+  0% {
+    transform: rotate(5deg) translateX(0);
+  }
+  50% {
+    transform: rotate(-5deg) translateX(-10px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(-10px);
+  }
+}

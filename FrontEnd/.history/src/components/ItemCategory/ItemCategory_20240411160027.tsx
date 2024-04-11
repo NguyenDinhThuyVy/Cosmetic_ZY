@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import 'src/Styles/Footer.scss'
 interface Props {
   img?: string

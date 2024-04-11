@@ -29,7 +29,7 @@ export default function ProductList() {
               alt='external-cosmetics-professions-woman-diversity-flaticons-lineal-color-flat-icons'
             />
           </div>
-          <div className=' grid grid-cols-9 py-4 place-items-center '>
+          <div className=' grid grid-cols-8 py-4 place-items-center '>
             <Link to='/'>
               <ItemCategory img='category1.webp' name='Kem dưỡng mặt'></ItemCategory>
             </Link>
@@ -40,22 +40,19 @@ export default function ProductList() {
               <ItemCategory img='category3.webp' name='Sữa Tắm'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category4.webp' name='Kem dưỡng mắt'></ItemCategory>
+              <ItemCategory img='category4.webp' name='Son Kem'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category5.webp' name='Mặt nạ'></ItemCategory>
+              <ItemCategory img='category5.webp' name='Cushion'></ItemCategory>
             </Link>
             <Link to='/'>
               <ItemCategory img='category6.webp' name='Sửa rữa mặt'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category7.webp' name='Tẩy trang'></ItemCategory>
+              <ItemCategory img='category7.webp' name='Tẩy Trang'></ItemCategory>
             </Link>
             <Link to='/'>
-              <ItemCategory img='category8.webp' name='Chống nắng'></ItemCategory>
-            </Link>
-            <Link to='/'>
-              <ItemCategory img='category9.webp' name='Dầu gội'></ItemCategory>
+              <ItemCategory img='category8.webp' name='Chống Nắng'></ItemCategory>
             </Link>
           </div>
         </div>

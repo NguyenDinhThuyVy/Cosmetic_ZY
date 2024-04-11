@@ -1,0 +1,21 @@
+@keyframes customAnimation {
+  0% {
+    transform: scale(0.75) rotate(-6deg);
+  }
+  25% {
+    transform: scale(1) rotate(-6deg);
+  }
+  50% {
+    transform: scale(1) rotate(6deg);
+  }
+  75% {
+    transform: scale(1) rotate(-6deg);
+  }
+  100% {
+    transform: scale(1) rotate(6deg);
+  }
+}
+
+.custom-pulse-animation {
+  animation: customAnimation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

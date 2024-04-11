@@ -36,7 +36,7 @@ module.exports = {
       },
       animation: {
         customAnimation: 'customAnimation 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-        Animationcat: 'Animationcat 3s steps(3, end) infinite'
+        Animationcat: 'AnimationCat 2s steps(3, end) infinite'
       }
     }
   },
