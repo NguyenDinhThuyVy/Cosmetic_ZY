@@ -1,0 +1,18 @@
+.swiper-pagination-bullet {
+  background-color: rgb(211, 82, 82);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: rgb(211, 82, 82); /* Đổi màu cho nút điều hướng */
+  width: 50px; /* Thiết lập chiều rộng */
+  height: 50px; /* Thiết lập chiều cao */
+  background-color: rgb(238, 231, 231);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: white;
+  font-size: 10px !important;
+  font-weight: 800;
+}

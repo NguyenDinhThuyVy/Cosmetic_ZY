@@ -1,0 +1,14 @@
+.ant-progress-inner {
+  background-color: rgba(199, 49, 48, 0.314);
+}
+.ant-progress-bg {
+  width: 23.3333%;
+  height: 20px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(199, 49, 48, 0.6),
+    rgba(199, 49, 48, 0.6) 10px,
+    rgb(199, 49, 48) 10px,
+    rgb(199, 49, 48) 20px
+  );
+}

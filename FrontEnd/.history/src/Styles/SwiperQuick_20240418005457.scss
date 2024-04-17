@@ -1,0 +1,50 @@
+.swiper-pagination-bullet {
+  background-color: rgb(211, 82, 82);
+  width: 40px; /* Thiết lập chiều rộng */
+  height: 2px; /* Thiết lập chiều cao */
+  border-radius: 0;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: rgb(211, 82, 82); /* Đổi màu cho nút điều hướng */
+  width: 50px; /* Thiết lập chiều rộng */
+  height: 50px; /* Thiết lập chiều cao */
+  background-color: rgba(255, 254, 254, 0.792);
+  border-radius: 50%;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: rgb(211, 82, 82);
+  font-size: 17px !important;
+  font-weight: 800;
+}
+
+.border-gradient {
+  position: relative;
+  background-color: white; // Set background to white
+  padding: 10px; // Maintain padding for content spacing
+  border: none; // Remove default border
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    z-index: -1;
+    background: linear-gradient(to right, #f0a80edb, #c43131d8, #671f57d1);
+    border: 2px solid transparent;
+    border-radius: inherit;
+    box-sizing: border-box; // Ensure border width is included in element size
+  }
+}
+.gradient-text {
+  background: linear-gradient(to right, #f0a80edb, #c43131d8, #671f57d1);
+  -webkit-background-clip: text; /* Clip background to text */
+  background-clip: text;
+  -webkit-text-fill-color: transparent; /* Hide the text fill color */
+  text-fill-color: transparent;
+}

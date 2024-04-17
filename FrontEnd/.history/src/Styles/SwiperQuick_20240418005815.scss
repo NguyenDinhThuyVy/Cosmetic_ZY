@@ -1,0 +1,28 @@
+.swiper-pagination-bullet {
+  background-color: rgb(211, 82, 82);
+  width: 40px; /* Thiết lập chiều rộng */
+  height: 2px; /* Thiết lập chiều cao */
+  border-radius: 0;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: rgb(211, 82, 82); /* Đổi màu cho nút điều hướng */
+  width: 50px; /* Thiết lập chiều rộng */
+  height: 50px; /* Thiết lập chiều cao */
+  background-color: rgba(255, 254, 254, 0.792);
+  border-radius: 50%;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: rgb(211, 82, 82);
+  font-size: 17px !important;
+  font-weight: 800;
+}
+
+.border-gradient {
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box padding-box, linear-gradient(90deg, rgb(255, 212, 0) 0%, rgb(199, 49, 48) 50.52%, rgb(102, 54, 149) 99.61%) border-box border-box;
+}
+}
