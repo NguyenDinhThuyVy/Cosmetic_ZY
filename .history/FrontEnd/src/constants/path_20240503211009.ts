@@ -1,0 +1,23 @@
+const path = {
+  home: '/',
+  login: '/login',
+  register: '/register',
+  logout: '/logout',
+  filterProduct: '/filterProduct',
+  productDetail: ':nameId',
+  cart: '/cart',
+  user: '/user',
+  profile: '/user/profile',
+  changePassword: '/user/password',
+  hitoryPurchase: '/user/purchase',
+  forgetpassword: '/forgetpassword',
+  admin: '/admin',
+  dashboard: '/admin/dashboard',
+  accounts: '/admin/accounts',
+  products: '/admin/products',
+  orders: '/admin/orders',
+  formAccountEdit: '/admin/accounts/edit',
+  formProductEdit: '/admin/products/edit'
+}
+
+export default path
