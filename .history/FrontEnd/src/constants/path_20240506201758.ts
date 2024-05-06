@@ -10,7 +10,7 @@ const path = {
   profile: '/user/profile',
   changePassword: '/user/password',
   hitoryPurchase: '/user/purchase',
-  AIform: '/user/AIform',
+  AIform: '/user/purchase',
   forgetpassword: '/forgetpassword',
   admin: '/admin',
   adminProfile: '/admin/profile',

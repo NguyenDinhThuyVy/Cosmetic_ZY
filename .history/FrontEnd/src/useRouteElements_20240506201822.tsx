@@ -23,7 +23,6 @@ import Products from './pages/Admin/pages/Products'
 import Orders from './pages/Admin/pages/Orders'
 import AdminLayout from './layouts/AdminLayout/AdminLayout'
 import AdminProfile from './pages/Admin/pages/AdminProfile'
-import FormAI from './pages/User/FormAI'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -133,7 +132,7 @@ export default function useRouteElements() {
             },
             {
               path: path.AIform,
-              element: <FormAI />
+              element: <HistoryPuchase />
             }
           ]
         }

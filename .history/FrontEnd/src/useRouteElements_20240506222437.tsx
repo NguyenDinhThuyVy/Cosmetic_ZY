@@ -144,7 +144,7 @@ export default function useRouteElements() {
       element: <AdminProtectedRoute />,
       children: [
         {
-          path: path.admin,
+          path: '',
           element: (
             <AdminLayout>
               <LayoutAdmin />

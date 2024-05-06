@@ -80,7 +80,7 @@ export default function UserSideNav() {
           Đơn mua
         </NavLink>
         <NavLink
-          to={path.AIform}
+          to='/'
           className={({ isActive }) =>
             classNames('mt-4 flex items-center capitalize text-[14px]  text-gray-700', {
               'text-rose-800': isActive,
