@@ -12,6 +12,15 @@ import useQueryParams from 'src/hooks/useQueryParams'
 import { useQuery } from 'react-query'
 import productApi from 'src/apis/product.api'
 import { sortBy, order as orderConstant } from 'src/constants/product'
+import { Schema } from 'src/utils/rules'
+import { Category } from 'src/types/category.type'
+import { NoUndefinedField } from 'src/types/utils.type'
+
+interface Props {
+  queryConfig: QueryConfig
+  categories: Category[]
+}
+type FormData = NoUndefinedField<Pick<Schema, 'price_max' | 'price_min'>>
 export type QueryConfig = {
   [key in keyof ProductListConfig]: string
 }
@@ -39,8 +48,8 @@ export default function ProductSearch() {
     },
     keepPreviousData: true
   })
-  const page = Number(queryConfig.page)
-  const { sort_by = sortBy.createdAt, order } = queryConfig
+  // const page = Number(queryConfig.page)
+  const { order } = queryConfig
   const handlePriceOrder = (orderValue: Exclude<ProductListConfig['order'], undefined>) => {
     navigate({
       pathname: path.filterProduct,
