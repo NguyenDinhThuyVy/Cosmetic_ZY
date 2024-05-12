@@ -1,4 +1,4 @@
-import { Breadcrumb, Modal, Switch } from 'antd'
+import { Breadcrumb, Switch } from 'antd'
 import './styles.scss'
 import 'src/Styles/Header.scss'
 import { Link, useLocation } from 'react-router-dom'
@@ -14,7 +14,6 @@ import { formatCurrency, generateNameId } from 'src/utils/utils'
 import QuantityController from 'src/components/QuantityController'
 import { Purchase } from 'src/types/purchase.type'
 import 'src/Styles/CheckBoxBrand.scss'
-import Payment from '../Payment'
 
 export default function Cart() {
   const { extendedPurchases, setExtendedPurchases } = useContext(AppContext)
@@ -116,16 +115,7 @@ export default function Cart() {
     const purchaseId = extendedPurchases[purchaseIndex]._id
     deletePurchasesMutation.mutate([purchaseId])
   }
-  const [isModalVisible, setIsModalVisible] = useState(false)
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
-  const handleBuyPurchases = () => {
-    if (checkedPurchases.length > 0) {
-      setIsModalVisible(true)
-    }
-  }
-  console.log(checkedPurchases)
+
   return (
     <section className='flex flex-col my-4 mx-16 font '>
       <Breadcrumb
@@ -259,15 +249,9 @@ export default function Cart() {
                 </tbody>
               </table>
               <div className='wc-proceed-to-checkout'>
-                <button
-                  className='text-white checkout-button  bg-gradient-to-r from-[#f0a80e] via-[#c43131] to-[#671f57] font-semibold'
-                  onClick={handleBuyPurchases}
-                >
+                <button className='text-white checkout-button  bg-gradient-to-r from-[#f0a80e] via-[#c43131] to-[#671f57] font-semibold'>
                   Thanh Toán Ngay
                 </button>
-                <Modal title='Thanh toán' open={isModalVisible} onCancel={handleCancel} footer={null} width={1000}>
-                  <Payment checkedPurchases={checkedPurchases} /> {/* Thay thế bằng nội dung modal của bạn */}
-                </Modal>
               </div>
             </div>
           </div>

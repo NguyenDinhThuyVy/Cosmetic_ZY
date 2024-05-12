@@ -13,6 +13,7 @@ import authApi from 'src/apis/auth.api'
 import { formatCurrency, getAvatarUrl } from 'src/utils/utils'
 import { purchasesStatus } from 'src/constants/purchase'
 import purchaseApi from 'src/apis/purchase.api'
+import useSearchProducts from 'src/hooks/useSearchProducts'
 
 const MAX_PURCHASES = 5
 function Header() {
@@ -47,7 +48,7 @@ function Header() {
     queryFn: () => purchaseApi.getPurchases({ status: purchasesStatus.inCart }),
     enabled: isAuthenticated
   })
-
+  const { onSubmitSearch, register } = useSearchProducts()
   const purchasesInCart = purchasesInCartData?.data.data
   return (
     <header className='font'>
@@ -58,11 +59,11 @@ function Header() {
           </Link>
         </div>
         <div className='search w-2/5 flex flex-col gap-2 '>
-          <form className=' mt-4'>
+          <form className=' mt-4' onSubmit={onSubmitSearch}>
             <div className='bg-gray-100 rounded-sm p-1 flex rounded-l-3xl rounded-r-3xl  h-9 '>
               <input
                 type='text'
-                name='search'
+                {...register('name')}
                 className='text-black px-3 flex-grow border-none outline-none bg-transparent'
                 placeholder='search'
               />
@@ -138,7 +139,7 @@ function Header() {
               <img
                 src={getAvatarUrl(profile?.avatar)}
                 alt=''
-                className='h-[32px] w-[32px] mt-1 border-2 border-gray-400 rounded-full '
+                className='h-[32px] w-[32px] mt-1 border-2 border-rose-400 rounded-full '
               />
               {isAuthenticated && (
                 <div className='flex flex-col justify-center mt-1'>
@@ -169,6 +170,7 @@ function Header() {
               )}
             </div>
           </div>
+
           <Popover
             renderPopover={
               <div className='bg-white relative shadow-md rounded-lg border border-gray-200 max-w-[400px] text-sm mr-3 font'>

@@ -117,14 +117,14 @@ export default function Cart() {
     deletePurchasesMutation.mutate([purchaseId])
   }
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const showModal = () => {
+    setIsModalOpen(true)
+  }
+
   const handleCancel = () => {
-    setIsModalVisible(false)
+    setIsModalOpen(false)
   }
-  const handleBuyPurchases = () => {
-    if (checkedPurchases.length > 0) {
-      setIsModalVisible(true)
-    }
-  }
+
   console.log(checkedPurchases)
   return (
     <section className='flex flex-col my-4 mx-16 font '>
@@ -261,12 +261,12 @@ export default function Cart() {
               <div className='wc-proceed-to-checkout'>
                 <button
                   className='text-white checkout-button  bg-gradient-to-r from-[#f0a80e] via-[#c43131] to-[#671f57] font-semibold'
-                  onClick={handleBuyPurchases}
+                  onClick={showModal}
                 >
                   Thanh Toán Ngay
                 </button>
-                <Modal title='Thanh toán' open={isModalVisible} onCancel={handleCancel} footer={null} width={1000}>
-                  <Payment checkedPurchases={checkedPurchases} /> {/* Thay thế bằng nội dung modal của bạn */}
+                <Modal title='Thanh toán' open={isModalVisible} onCancel={handleCancel} footer={null}>
+                  <Payment /> {/* Thay thế bằng nội dung modal của bạn */}
                 </Modal>
               </div>
             </div>

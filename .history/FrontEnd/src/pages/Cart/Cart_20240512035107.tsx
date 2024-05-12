@@ -125,7 +125,7 @@ export default function Cart() {
       setIsModalVisible(true)
     }
   }
-  console.log(checkedPurchases)
+
   return (
     <section className='flex flex-col my-4 mx-16 font '>
       <Breadcrumb
@@ -265,8 +265,8 @@ export default function Cart() {
                 >
                   Thanh Toán Ngay
                 </button>
-                <Modal title='Thanh toán' open={isModalVisible} onCancel={handleCancel} footer={null} width={1000}>
-                  <Payment checkedPurchases={checkedPurchases} /> {/* Thay thế bằng nội dung modal của bạn */}
+                <Modal title='Thanh toán' open={isModalVisible} onCancel={handleCancel} footer={null}>
+                  <Payment /> {/* Thay thế bằng nội dung modal của bạn */}
                 </Modal>
               </div>
             </div>

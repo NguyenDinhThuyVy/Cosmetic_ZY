@@ -266,7 +266,25 @@ export default function Cart() {
                   Thanh Toán Ngay
                 </button>
                 <Modal title='Thanh toán' open={isModalVisible} onCancel={handleCancel} footer={null} width={1000}>
-                  <Payment checkedPurchases={checkedPurchases} /> {/* Thay thế bằng nội dung modal của bạn */}
+                  {/* <Payment checkedPurchases={checkedPurchases} /> Thay thế bằng nội dung modal của bạn */}
+                  <Steps
+                    current={current}
+                    onChange={onChange}
+                    items={[
+                      {
+                        title: 'Step 1',
+                        description
+                      },
+                      {
+                        title: 'Step 2',
+                        description
+                      },
+                      {
+                        title: 'Step 3',
+                        description
+                      }
+                    ]}
+                  />
                 </Modal>
               </div>
             </div>
