@@ -1,16 +1,16 @@
 import { Router } from 'express'
-import addressController from '../../controllers/address.controller'
+import paymentController from '../../controllers/payment.controller'
 import authMiddleware from '../../middleware/auth.middleware'
 import helpersMiddleware from '../../middleware/helpers.middleware'
 // import purchaseMiddleware from '../../middleware/purchase.middleware'
 import { wrapAsync } from '../../utils/response'
 
-export const userAddressRouter = Router()
+export const userProductsRouter = Router()
 
-userAddressRouter.post(
-  '/:id',
-  helpersMiddleware.entityValidator,
-  // purchaseMiddleware.identifyPurchase,
+userProductsRouter.post(
+  '/:product_id',
   authMiddleware.verifyAccessToken,
-  wrapAsync(addressController.addShippingAddress)
+  helpersMiddleware.idRule('product_id'),
+  // helpersMiddleware.idValidator,
+  wrapAsync(ProductController.addCommentToProduct)
 )
