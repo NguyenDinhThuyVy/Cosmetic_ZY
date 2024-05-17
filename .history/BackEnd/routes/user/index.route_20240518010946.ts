@@ -16,7 +16,7 @@ const userRoutes = {
     },
     {
       path: 'skincare',
-      route: userSkincareRouter,
+      route: userProductsRouter,
     },
     {
       path: 'payment',

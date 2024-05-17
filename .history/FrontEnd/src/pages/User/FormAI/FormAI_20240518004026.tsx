@@ -199,6 +199,9 @@ export default function FormAI() {
               <span className='text-start text-[14px] font-semibold '>
                 Tình Trạng Da: <span className='font-normal'>hhhfh,ccc,ddd</span>{' '}
               </span>
+              <span className='text-start text-[14px] font-semibold '>
+                Thành Phố: <span className='font-normal'>255</span>{' '}
+              </span>
             </div>
             <div className='flex gap-[54px]'>
               <span className='text-start text-[14px] font-semibold '>
@@ -208,7 +211,7 @@ export default function FormAI() {
                 Mong muốn cải thiện: <span className='font-normal'>55</span>{' '}
               </span>
             </div>
-            <div className='absolute top-0 right-0'>
+            <div className='absolute top-[5%] right-0'>
               <img src={logo} alt='' className='w-[240px] h-[100px]' />
             </div>
           </div>

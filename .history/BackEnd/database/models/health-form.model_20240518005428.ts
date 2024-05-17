@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const HealthFormSchema = new Schema(
+const SkincareFormSchema = new Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -8,10 +8,11 @@ const HealthFormSchema = new Schema(
       required: true,
     },
     sex: { type: String },
-    height: { type: Number }, // Chiều cao của người dùng
+    routine: { type: Number, default: 0 }, // Chu trình mong muốn
+    // 0: Cơ bản, 1: Nâng cao
     age: { type: Number },
     weight: { type: Number }, // Cân nặng của người dùng
-    current_health_conditions: [{ name: String }],
+    skinCondition: [{ name: String }],
     dietary_restrictions: [{ name: String }], // Hạn chế dinh dưỡng của người dùng (mảng với nhiều hạn chế)
   },
   {
@@ -19,4 +20,7 @@ const HealthFormSchema = new Schema(
   }
 )
 
-export const HealthFormModel = mongoose.model('health_forms', HealthFormSchema)
+export const SkincareFormModel = mongoose.model(
+  'skincare_forms',
+  SkincareFormSchema
+)

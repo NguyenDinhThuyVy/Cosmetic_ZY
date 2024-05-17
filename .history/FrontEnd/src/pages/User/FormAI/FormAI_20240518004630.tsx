@@ -179,6 +179,7 @@ export default function FormAI() {
             Đóng
           </Button>
         ]}
+        bodyStyle={{ padding: 0 }} // Remove padding from the body
       >
         <div className='flex flex-col border-2 border-gray-100 rounded-lg p-4 font'>
           <span className='text-center text-[16px] font-bold uppercase'>GỢI Ý CHU TRÌNH CHO BẠN</span>

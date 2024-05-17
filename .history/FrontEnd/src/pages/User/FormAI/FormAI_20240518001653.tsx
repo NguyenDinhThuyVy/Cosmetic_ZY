@@ -1,6 +1,5 @@
 import { Button, ConfigProviderProps, Form, Image, Input, Modal, Select, SelectProps } from 'antd'
 import { useState } from 'react'
-import logo from 'src/assets/logo.png'
 type SizeType = ConfigProviderProps['componentSize']
 const options: SelectProps['options'] = [
   { label: 'mụn ẩn', value: 'mụn ẩn' },
@@ -171,7 +170,7 @@ export default function FormAI() {
       </div>
       <Modal
         title=''
-        width={1000}
+        width={800}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={[
@@ -183,10 +182,10 @@ export default function FormAI() {
         <div className='flex flex-col border-2 border-gray-100 rounded-lg p-4 font'>
           <span className='text-center text-[16px] font-bold uppercase'>GỢI Ý CHU TRÌNH CHO BẠN</span>
 
-          <div className='px-2 flex flex-col gap-3 mt-2 relative'>
+          <div className='px-2 flex flex-col gap-3 mt-2'>
             <div className='flex gap-6'>
               <span className='text-start text-[14px] font-semibold '>
-                Tên người dùng: <span className='font-normal'>Thúy Vy</span>{' '}
+                Tên khách hàng: <span className='font-normal'>Thúy Vy</span>{' '}
               </span>
               <span className='text-start text-[14px] font-semibold '>
                 Tuổi : <span className='font-normal'>Thúy Vy</span>{' '}
@@ -199,6 +198,9 @@ export default function FormAI() {
               <span className='text-start text-[14px] font-semibold '>
                 Tình Trạng Da: <span className='font-normal'>hhhfh,ccc,ddd</span>{' '}
               </span>
+              <span className='text-start text-[14px] font-semibold '>
+                Thành Phố: <span className='font-normal'>255</span>{' '}
+              </span>
             </div>
             <div className='flex gap-[54px]'>
               <span className='text-start text-[14px] font-semibold '>
@@ -208,38 +210,12 @@ export default function FormAI() {
                 Mong muốn cải thiện: <span className='font-normal'>55</span>{' '}
               </span>
             </div>
-            <div className='absolute top-0 right-0'>
-              <img src={logo} alt='' className='w-[240px] h-[100px]' />
-            </div>
-          </div>
-          <div className='flex gap-[54px] px-2 mt-4 w-full'>
-            <div className='text-start text-[14px] font-semibold border-2  border-gray-200 rounded-lg p-4 flex-[40%]'>
-              Thành phần nên sử dụng:{' '}
-              <div className='font-normal px-4'>
-                <ul className='list-disc'>
-                  <li>%numbutin, C</li>
-                </ul>
-              </div>{' '}
-            </div>
-            <div className='text-start text-[14px] font-semibold border-2  border-gray-200 rounded-lg p-4  flex-[60%]'>
-              Lời khuyên:{' '}
-              <div className='font-normal px-4'>
-                <ul className='list-disc'>
-                  <li>
-                    Với công thức mới chứa hạt massage siêu mịn từ hạt cám gạo mang đến khả năng làm sạch và sáng mịn
-                    da. Đồng thời công thức tạo bọt mịn giúp làm sạch sâu trong lỗ chân lông, làm sạch bụi bẩn ô nhiễm
-                    trên bề mặt da của bạn. Độ ẩm được lưu giữ tối ưu sau khi rửa giúp làn da trắng sáng và khỏe mạnh.
-                    Công dụng của sữa rửa mặt THEFACESHOP Rice Water Bright Rice Bran Foaming Cleanse
-                  </li>
-                </ul>
-              </div>{' '}
-            </div>
           </div>
 
           <table className='table-auto w-full mt-5 text-[12px] border-2 border-gray-100 rounded-lg p-4'>
             <thead>
               <tr>
-                <th className='px-4 py-2 text-center w-[10%] text-[12px]'>Bước</th>
+                <th className='px-4 py-2 text-center text-[12px]'>Bước</th>
                 <th className='px-4 py-2 text-center text-[12px]'>Ảnh</th>
                 <th className='px-4 py-2 text-center w-[40%] text-[12px]'>Tên sản phẩm</th>{' '}
                 <th className='px-4 py-2 text-center text-[12px]'>Công dụng</th>
@@ -257,10 +233,10 @@ export default function FormAI() {
                     />
                   </td>
 
-                  <td className='py-2 text-start pl-10'>
+                  <td className='px-4 py-2 text-center'>
                     Nước Thần Keo Ong Cấp Ẩm, Phục Hồi Da CNP Propolis Treatment Ampoule Essence 150Ml
                   </td>
-                  <td className='px-4 py-2 text-start'>
+                  <td className='px-4 py-2 text-center'>
                     {' '}
                     Sữa rửa mặt CNP chứa hàm lượng dưỡng chất keo ong cao, vừa làm sạch da dịu nhẹ vừa phục hồi thương
                     tổn, tăng cường sinh khí làn da, giảm thâm mụn , trắng da, giúp làn da sản sinh collogen, cấp ẩm cho
@@ -270,16 +246,6 @@ export default function FormAI() {
               </>
             </tbody>
           </table>
-          <div className='flex gap-[54px] px-2 mt-4 w-full items-center justify-center'>
-            <div>
-              <strong>
-                <em>
-                  Làn da đẹp không phải là sự hoàn hảo mà là sự tự tin và yêu thương bản thân. Hãy yêu và chăm sóc da
-                  của mình.
-                </em>
-              </strong>
-            </div>
-          </div>
         </div>
       </Modal>
     </div>

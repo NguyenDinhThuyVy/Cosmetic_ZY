@@ -1,6 +1,5 @@
 import { Button, ConfigProviderProps, Form, Image, Input, Modal, Select, SelectProps } from 'antd'
 import { useState } from 'react'
-import logo from 'src/assets/logo.png'
 type SizeType = ConfigProviderProps['componentSize']
 const options: SelectProps['options'] = [
   { label: 'mụn ẩn', value: 'mụn ẩn' },
@@ -183,7 +182,7 @@ export default function FormAI() {
         <div className='flex flex-col border-2 border-gray-100 rounded-lg p-4 font'>
           <span className='text-center text-[16px] font-bold uppercase'>GỢI Ý CHU TRÌNH CHO BẠN</span>
 
-          <div className='px-2 flex flex-col gap-3 mt-2 relative'>
+          <div className='px-2 flex flex-col gap-3 mt-2'>
             <div className='flex gap-6'>
               <span className='text-start text-[14px] font-semibold '>
                 Tên người dùng: <span className='font-normal'>Thúy Vy</span>{' '}
@@ -199,6 +198,9 @@ export default function FormAI() {
               <span className='text-start text-[14px] font-semibold '>
                 Tình Trạng Da: <span className='font-normal'>hhhfh,ccc,ddd</span>{' '}
               </span>
+              <span className='text-start text-[14px] font-semibold '>
+                Thành Phố: <span className='font-normal'>255</span>{' '}
+              </span>
             </div>
             <div className='flex gap-[54px]'>
               <span className='text-start text-[14px] font-semibold '>
@@ -207,9 +209,6 @@ export default function FormAI() {
               <span className='text-start text-[14px] font-semibold '>
                 Mong muốn cải thiện: <span className='font-normal'>55</span>{' '}
               </span>
-            </div>
-            <div className='absolute top-0 right-0'>
-              <img src={logo} alt='' className='w-[240px] h-[100px]' />
             </div>
           </div>
           <div className='flex gap-[54px] px-2 mt-4 w-full'>
@@ -274,7 +273,7 @@ export default function FormAI() {
             <div>
               <strong>
                 <em>
-                  Làn da đẹp không phải là sự hoàn hảo mà là sự tự tin và yêu thương bản thân. Hãy yêu và chăm sóc da
+                  " Làn da đẹp không phải là sự hoàn hảo mà là sự tự tin và yêu thương bản thân. Hãy yêu và chăm sóc da
                   của mình.
                 </em>
               </strong>
