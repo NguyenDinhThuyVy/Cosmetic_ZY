@@ -6,7 +6,7 @@ import { ConfigProvider, Image, Input, Radio } from 'antd'
 
 import { ExtendedPurchase } from 'src/types/purchase.type'
 import { BsCreditCard2BackFill } from 'react-icons/bs'
-
+import { PayPalButton } from 'react-paypal-button-v3'
 import { Link } from 'react-router-dom'
 import path from 'src/constants/path'
 import { purchasesStatus } from 'src/constants/purchase'
@@ -244,7 +244,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
 
                   {showPayPalButton && (
                     <div className='flex flex-col gap-4 border-2 border-gray-100 rounded-lg p-5 h-[140px] w-full overflow-hidden'>
-                      <PayPalBu
+                      <PayPalButton
                         amount={total}
                         onSuccess={() => {
                           setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))

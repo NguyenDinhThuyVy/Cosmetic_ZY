@@ -244,7 +244,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
 
                   {showPayPalButton && (
                     <div className='flex flex-col gap-4 border-2 border-gray-100 rounded-lg p-5 h-[140px] w-full overflow-hidden'>
-                      <PayPalBu
+                      <PayPalButton
                         amount={total}
                         onSuccess={() => {
                           setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))
