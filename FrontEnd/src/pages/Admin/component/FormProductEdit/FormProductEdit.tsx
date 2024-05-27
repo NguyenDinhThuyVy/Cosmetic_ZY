@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Image, Input, Modal, Select, Upload } from 'antd'
+import { Form, GetProp, Input, message, Modal, Select, Upload, UploadProps } from 'antd'
 
 import adminApi from 'src/apis/admin.api'
 import { toast } from 'react-toastify'
 import useQueryConfig from 'src/hooks/useQueryConfig'
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 
-import { getAvatarUrl } from 'src/utils/utils'
+import axios from 'axios'
 
 const formItemLayout = {
   labelCol: {
@@ -28,10 +28,15 @@ interface CollectionCreateFormProps {
 
 const FormProductEdit: React.FC<CollectionCreateFormProps> = ({ productId, onClose, onUpdateSuccess }) => {
   const [form] = Form.useForm()
-
+  const [image, setImage] = useState(null)
+  const [images, setImages] = useState(null)
   const [productData, setProductData] = useState<any>(null)
   const [initialCategoryValue, setInitialCategoryValue] = useState([''])
-  console.log(initialCategoryValue)
+  const [fileList, setFileList] = useState<any>([])
+  const [fileList1, setFileList1] = useState<any>([])
+  const [previewImage, setPreviewImage] = useState('')
+  const [previewOpen, setPreviewOpen] = useState(false)
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -56,12 +61,14 @@ const FormProductEdit: React.FC<CollectionCreateFormProps> = ({ productId, onClo
         position: 'top-right', // Vị trí hiển thị thông báo
         autoClose: 1200 // Thời gian tự động đóng thông báo sau 1200 mili giây (1.2 giây)
       })
+      console.log(initialCategoryValue), console.log(previewImage)
+      console.log(previewOpen)
       onUpdateSuccess() // Notify update success
       onClose()
     } catch (error) {
-      toast.error('Chỉnh sửa sản phẩm  thất bại', {
+      toast.error('Chỉnh sửa sản phẩm thất bại', {
         position: 'top-right', // Vị trí hiển thị thông báo
-        autoClose: 1200 // Thời gian tự động đóng thông báo sau 2000 mili giây (2 giây)
+        autoClose: 1200 // Thời gian tự động đóng thông báo sau 1200 mili giây (1.2 giây)
       })
     }
   }
@@ -73,61 +80,166 @@ const FormProductEdit: React.FC<CollectionCreateFormProps> = ({ productId, onClo
       return adminApi.getcategories()
     }
   })
-  const uploadImageMutaion = useMutation(adminApi.uploadImage)
-  // const uploadImagesMutaion = useMutation(adminApi.uploadImages)
 
-  const image = productData?.data.image
-
-  const handleUploadChange = async (info: any) => {
-    const formData = new FormData()
-    formData.append('image', info.file.originFileObj || '')
-    const uploadRes = await uploadImageMutaion.mutateAsync(formData)
-    // console.log('hihi')
-    form.setFieldsValue({
-      image: uploadRes.data.data // Sử dụng đường dẫn của ảnh từ dữ liệu phản hồi
-    })
-    setProductData((prevProductData: any) => ({
-      ...prevProductData,
-      data: {
-        ...prevProductData.data,
-        image: getAvatarUrl(uploadRes.data.data)
-      }
-    }))
-  }
-
-  const customRequest = async ({ file, onSuccess, onError }: any) => {
-    const token = localStorage.getItem('profile')
-    const formData = new FormData()
-    formData.append('file', file)
-
-    try {
-      const response = await fetch('http://localhost:4000/admin/products/upload-image', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-        body: formData
-      })
-
-      if (!response.ok) {
-        throw new Error('Upload failed')
-      }
-
-      const responseData = await response.json()
-      onSuccess(responseData, file)
-    } catch (error) {
-      onError(error)
+  useEffect(() => {
+    if (productData?.data.image) {
+      setImage(productData.data.image)
     }
-  }
+  }, [productData])
 
-  const images = productData?.data.images
+  useEffect(() => {
+    if (productData?.data.images) {
+      setImages(productData.data.images)
+      const result = productData.data.images.map((item: any) => ({
+        url: item
+      }))
+      console.log(result)
+      setFileList1(result)
+    }
+  }, [productData])
+  console.log(fileList1)
   useEffect(() => {
     if (productData && productData.data && productData.data.category) {
       const categoryName = productData.data.category.name
       setInitialCategoryValue([categoryName])
     }
   }, [productData])
+  const uploadProfileImg = async (formData: any) => {
+    try {
+      const res = await axios.post('https://api.cloudinary.com/v1_1/dvpgs36ca/image/upload', formData)
+      const { url, asset_id, etag } = res.data
+      return { url, asset_id, etag }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  const uploadProfileImg1 = async (formData: any) => {
+    try {
+      const res = await axios.post('https://api.cloudinary.com/v1_1/dvpgs36ca/image/upload', formData)
+      const { url, asset_id, etag } = res.data
+      return { url, asset_id, etag }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  const handleRemove = (e: any) => {
+    // Nếu item được xóa là `image` mặc định
+    if (image && e.uid === '-1') {
+      setImage(null) // Xóa `image` và thiết lập lại state
+    } else if (fileList) {
+      // Xử lý xóa item khỏi `fileList` nếu nó không phải là `image` mặc định
+      const index = fileList.findIndex((f: { uid: string }) => f.uid === e.uid)
+      if (index !== -1) {
+        const newFileList = [...fileList]
+        newFileList.splice(index, 1)
+        setFileList(newFileList)
+      }
+    }
+  }
+  const handleRemove1 = (e: any) => {
+    if (images && e.uid === '-1') {
+      setImages(null) // Xóa `image` và thiết lập lại state
+    } else if (fileList1) {
+      // Xử lý xóa item khỏi `fileList` nếu nó không phải là `image` mặc định
+      const index = fileList1.findIndex((f: { uid: string }) => f.uid === e.uid)
+      if (index !== -1) {
+        const newFileList = [...fileList1]
+        newFileList.splice(index, 1)
+        setFileList1(newFileList)
+      }
+    }
+  }
 
+  const getBase64 = (file: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = (error) => reject(error)
+    })
+  const handlePreview = async (file: any) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj)
+    }
+    setPreviewImage(file.url || file.preview)
+    setPreviewOpen(true)
+  }
+  /* Upload image with local */
+  const upLoadImage = async (e: any) => {
+    try {
+      if (e.file) {
+        const formData = new FormData()
+        formData.append('file', e.file)
+        formData.append('upload_preset', 'Health')
+        const image = await uploadProfileImg(formData)
+        console.log(image)
+        setFileList((prevImagePaths: any) => [
+          ...prevImagePaths,
+          {
+            url: image?.url
+          }
+        ])
+        form.setFieldsValue({ image: image?.url })
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0]
+  const beforeUpload = (file: FileType) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!')
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!')
+    }
+    return isJpgOrPng && isLt2M
+  }
+
+  const upLoadImage1 = async (e: any) => {
+    try {
+      if (e.file) {
+        const formData = new FormData()
+        formData.append('file', e.file)
+        formData.append('upload_preset', 'Health')
+        const image = await uploadProfileImg1(formData)
+
+        if (image && image.url) {
+          const newFileList1 = [...fileList1, { url: image.url }]
+          setFileList1((prevImagePaths: any) => [
+            ...prevImagePaths,
+            {
+              url: image?.url
+            }
+          ])
+          const urls = newFileList1.map((file) => file.url)
+
+          form.setFieldsValue({ images: urls })
+        }
+        // const image = await uploadProfileImg1(formData)
+        // if (image && image.url) {
+        //   const newFileList1 = [...fileList1, { uid: e.file.uid, name: e.file.name, url: image.url }]
+        //   setFileList1(newFileList1)
+        //   form.setFieldsValue({ images: newFileList1.map((file) => file.url) })
+        // }
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const beforeUpload1 = async (list: any) => {
+    const prevList = fileList1.length
+    const maxCount = list.length
+
+    if (prevList + maxCount > 6) {
+      return false
+    }
+    return true
+  }
   return (
     <Modal
       open
@@ -174,36 +286,54 @@ const FormProductEdit: React.FC<CollectionCreateFormProps> = ({ productId, onClo
         <div className='grid grid-cols-2 grid-flow-row  w-full'>
           <Form.Item label='Ảnh chính' name='image' initialValue={image}>
             <Upload
-              action='http://localhost:4000/admin/products/upload-image'
-              customRequest={customRequest} // Sử dụng customRequest để tải ảnh lên
+              name='avatar'
+              action='https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload'
               listType='picture-card'
+              fileList={image ? [{ uid: '-1', name: 'image.png', url: image }] : fileList}
               maxCount={1}
-              fileList={image ? [{ uid: '-1', name: 'image.png', url: image }] : []}
-              onRemove={() => {
-                // Xóa ảnh khỏi fileList khi người dùng nhấn nút xóa
-                setProductData((prevProductData: any) => ({
-                  ...prevProductData,
-                  data: {
-                    ...prevProductData.data,
-                    image: null
-                  }
-                }))
-              }}
-              onChange={handleUploadChange}
+              onPreview={handlePreview}
+              beforeUpload={beforeUpload}
+              onRemove={(e) => handleRemove(e)}
+              customRequest={(e) => upLoadImage(e)}
             >
-              {image ? null : <div>Upload</div>}
+              {fileList.length <= 0 && image === null ? (
+                <div>
+                  <div
+                    style={{
+                      marginTop: 8
+                    }}
+                  >
+                    Upload
+                  </div>
+                </div>
+              ) : null}
             </Upload>
           </Form.Item>
 
           <Form.Item label='Ảnh minh họa' name='images' initialValue={images}>
-            <div className='flex flex-wrap -mx-4'>
-              {images &&
-                images.map((imageUrl: any, index: any) => (
-                  <div key={index} className='w-1/4 px-4 mb-4'>
-                    <Image src={imageUrl} alt={`Image ${index + 1}`} className='w-full h-auto' />
+            <Upload
+              name='images'
+              action='https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload'
+              listType='picture-card'
+              fileList={fileList1}
+              maxCount={5}
+              onPreview={handlePreview}
+              beforeUpload={beforeUpload1}
+              onRemove={(e) => handleRemove1(e)}
+              customRequest={(e) => upLoadImage1(e)}
+            >
+              {fileList.length > 5 ? null : (
+                <div>
+                  <div
+                    style={{
+                      marginTop: 8
+                    }}
+                  >
+                    Upload
                   </div>
-                ))}
-            </div>
+                </div>
+              )}
+            </Upload>
           </Form.Item>
         </div>
 

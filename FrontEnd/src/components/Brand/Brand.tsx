@@ -12,7 +12,7 @@ import brand12 from 'src/assets/Brands/brand12.webp'
 import brand7 from 'src/assets/Brands/brand7.webp'
 import brand13 from 'src/assets/Brands/brand13.webp'
 import brand14 from 'src/assets/Brands/brand14.webp'
-import brand10 from 'src/assets/Brands/brand10.webp'
+
 interface AppProps {}
 const FlashSale: FC<AppProps> = () => {
   return (

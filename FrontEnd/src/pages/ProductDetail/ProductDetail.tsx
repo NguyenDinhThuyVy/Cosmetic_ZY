@@ -43,7 +43,7 @@ export default function ProductDetail() {
   const queryClient = useQueryClient()
   const { nameId } = useParams()
 
-  const [buyCount, setBuyCount] = useState(1)
+  const [buyCount] = useState(1)
   const id = getIdFromNameId(nameId as string)
   const { data: productDetailData } = useQuery({
     queryKey: ['product', id],
@@ -118,9 +118,9 @@ export default function ProductDetail() {
     imageRef.current?.removeAttribute('style')
   }
 
-  const handleBuyCount = (value: number) => {
-    setBuyCount(value)
-  }
+  // const handleBuyCount = (value: number) => {
+  //   setBuyCount(value)
+  // }
 
   const addToCart = () => {
     addToCartMutation.mutate(

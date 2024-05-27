@@ -93,7 +93,7 @@ function Header() {
 
           const newNotification = `<div style="display: flex; gap: 8px; flex-wrap: wrap;">
           <img
-            src=${payment.purchase[0].product.image}
+            src=${payment.purchases[0].product.image}
             alt='hihi'
             style="width: 70px; border-radius: 8px; border: 2px solid #ccc;"
           />

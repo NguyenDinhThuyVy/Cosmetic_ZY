@@ -3,21 +3,21 @@ import FirstForm from '../../component/FormAdd'
 import { useEffect, useState } from 'react'
 import adminApi from 'src/apis/admin.api'
 import 'src/Styles/CheckBoxBrand.scss'
+import useQueryConfig from 'src/hooks/useQueryConfig'
+import { useQuery } from 'react-query'
 function Products() {
-  const [products, setProducts] = useState([]) // State to store products
   const [shouldRefetch, setShouldRefetch] = useState<boolean>(false)
-  const fetchData = async () => {
-    try {
-      const productData: any = await adminApi.getAllProducts()
-      setProducts(productData) // Update products state with new data
-    } catch (error) {
-      console.error('Error fetching data:', error)
-    }
-  }
 
+  const queryConfig = useQueryConfig()
+  const { refetch } = useQuery({
+    queryKey: ['products', queryConfig],
+    queryFn: () => {
+      return adminApi.getAllProducts()
+    }
+  })
   useEffect(() => {
     if (shouldRefetch) {
-      fetchData()
+      refetch()
       setShouldRefetch(false) // Đặt shouldRefetch lại sau khi fetchData đã được gọi
     }
   }, [shouldRefetch])

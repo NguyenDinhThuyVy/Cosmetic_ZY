@@ -9,7 +9,6 @@ export interface User {
   avatar?: string
   address?: string
   phone?: string
-  type: number
   createdAt: string
   updatedAt: string
 }

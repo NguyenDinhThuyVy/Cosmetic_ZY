@@ -1,6 +1,6 @@
 import { DollarCircleOutlined, ShoppingCartOutlined, ShoppingOutlined, UserOutlined } from '@ant-design/icons'
 import { Card, Space, Statistic, Table, Typography } from 'antd'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
@@ -98,7 +98,7 @@ function ChartWeek() {
   )
 }
 
-function DashboardCard({ title, value, icon }) {
+function DashboardCard({ title, value, icon }: any) {
   return (
     <Card>
       <Space direction='horizontal'>

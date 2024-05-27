@@ -1,8 +1,8 @@
 import { Button, ConfigProviderProps, Form, Image, Input, Modal, Select, SelectProps } from 'antd'
-import { useEffect, useState } from 'react'
-import { useMutation } from 'react-query'
-import { toast } from 'react-toastify'
-import userApi from 'src/apis/user.api'
+import { useState } from 'react'
+// import { useMutation } from 'react-query'
+// import { toast } from 'react-toastify'
+// import userApi from 'src/apis/user.api'
 import logo from 'src/assets/logo.png'
 type SizeType = ConfigProviderProps['componentSize']
 const options: SelectProps['options'] = [
@@ -36,55 +36,55 @@ export default function FormAI() {
   const [size] = useState<SizeType>('middle')
   const [hovered, setHovered] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [userId, setUserId] = useState('')
-  const [data, setdata] = useState({
-    sex: '',
-    desired_routine: '',
-    skin_type: '',
-    skin_condition: '',
-    desired_improv: ''
-  })
+  // const [userId, setUserId] = useState('')
+  // const [data, setdata] = useState({
+  //   sex: '',
+  //   desired_routine: '',
+  //   skin_type: '',
+  //   skin_condition: '',
+  //   desired_improv: ''
+  // })
 
-  const createHealthFormMutation = useMutation({
-    mutationFn: userApi.createSkincareForm
-  })
+  // const createHealthFormMutation = useMutation({
+  //   mutationFn: userApi.createSkincareForm
+  // })
 
-  const handleSubmit = async () => {
-    const values = await form.validateFields()
-    // console.log(values)
-    try {
-      const res: any = await createHealthFormMutation.mutateAsync(values)
-      toast.success('Thêm thông tin thành công')
-      localStorage.setItem('Id_form', res.data.data._id)
-      // console.log('Sản phẩm gợi ý:', res.data.products)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  const getHealthFormDetail = useMutation({
-    mutationFn: userApi.getSkincareFormDetail
-  })
+  // const handleSubmit = async () => {
+  //   const values = await form.validateFields()
+  //   // console.log(values)
+  //   try {
+  //     const res: any = await createHealthFormMutation.mutateAsync(values)
+  //     toast.success('Thêm thông tin thành công')
+  //     localStorage.setItem('Id_form', res.data.data._id)
+  //     // console.log('Sản phẩm gợi ý:', res.data.products)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+  // const getHealthFormDetail = useMutation({
+  //   mutationFn: userApi.getSkincareFormDetail
+  // })
 
-  useEffect(() => {
-    // Lấy user id từ local storage và cập nhật state
-    const profileDataString = localStorage.getItem('profile')
-    const profileData = profileDataString ? JSON.parse(profileDataString) : null
-    const userIdFromLocalStorage = profileData ? profileData._id : ''
-    setUserId(userIdFromLocalStorage)
-  }, [])
+  // useEffect(() => {
+  //   // Lấy user id từ local storage và cập nhật state
+  //   const profileDataString = localStorage.getItem('profile')
+  //   const profileData = profileDataString ? JSON.parse(profileDataString) : null
+  //   const userIdFromLocalStorage = profileData ? profileData._id : ''
+  //   setUserId(userIdFromLocalStorage)
+  // }, [])
   // console.log(userId)
-  useEffect(() => {
-    // Set initial values for form fields
-    form.setFieldsValue({
-      user: data ? data._id : userId,
-      sex: data ? data.sex : undefined,
-      desired_routine: data ? data.desired_routine : undefined,
-      skin_type: data ? data.skin_type : undefined,
-      skin_condition: data ? data.skin_condition : undefined,
-      desired_improv: data ? data.desired_improv : undefined
-      // ... set values for other fields
-    })
-  }, [data])
+  // useEffect(() => {
+  //   // Set initial values for form fields
+  //   form.setFieldsValue({
+  //     user: data ? data._id : userId,
+  //     sex: data ? data.sex : undefined,
+  //     desired_routine: data ? data.desired_routine : undefined,
+  //     skin_type: data ? data.skin_type : undefined,
+  //     skin_condition: data ? data.skin_condition : undefined,
+  //     desired_improv: data ? data.desired_improv : undefined
+  //     // ... set values for other fields
+  //   })
+  // }, [data])
 
   // Hàm để hiển thị modal
   const showModal = () => {
@@ -114,7 +114,7 @@ export default function FormAI() {
                 {' '}
                 <div className='flex flex-col gap-2'>
                   <span className='text-[15px]'>ID Form</span>
-                  <Form.Item name='user' initialValue={data ? data._id : userId} style={{ width: 180 }}>
+                  <Form.Item name='user' style={{ width: 180 }}>
                     <Input style={{ width: '100%' }} disabled />
                   </Form.Item>
                 </div>
@@ -122,7 +122,6 @@ export default function FormAI() {
                   <span className='text-[15px]'>Loại da</span>
                   <Form.Item>
                     <Select
-                      defaultValue={data ? data.skin_type : undefined}
                       style={{ width: 180 }}
                       onChange={handleChange}
                       options={[

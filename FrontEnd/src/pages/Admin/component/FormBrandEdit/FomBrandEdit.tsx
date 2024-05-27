@@ -4,8 +4,6 @@ import { Form, Input, Modal, Upload } from 'antd'
 import adminApi from 'src/apis/admin.api'
 import { toast } from 'react-toastify'
 
-import { useMutation } from 'react-query'
-
 import { getAvatarUrl } from 'src/utils/utils'
 
 const formItemLayout = {

@@ -2,7 +2,7 @@ import { Button, Image, Modal, Table, TableProps, Tag } from 'antd'
 import { useQuery } from 'react-query'
 import paymentApi from 'src/apis/payment.api'
 import { Payment } from 'src/types/payment.type'
-import { ClockCircleOutlined, SyncOutlined, CarOutlined, SmileOutlined } from '@ant-design/icons'
+import { ClockCircleOutlined, SyncOutlined, CarOutlined, SmileOutlined, QuestionOutlined } from '@ant-design/icons'
 import moment from 'moment'
 import { formatCurrency } from 'src/utils/utils'
 import { useState } from 'react'
@@ -101,6 +101,11 @@ export default function TableHistory() {
             icon = <SmileOutlined />
             color = 'green' // green
             break
+          default:
+            statusText = 'Không xác định'
+            icon = <QuestionOutlined />
+            color = 'default' // grey
+            break
         }
 
         return (
@@ -117,7 +122,6 @@ export default function TableHistory() {
 
     return (
       <>
-        {' '}
         <Table
           pagination={{
             showSizeChanger: true, // Hiển thị tùy chọn lựa chọn pageSize
@@ -162,7 +166,7 @@ export default function TableHistory() {
                   </div>
                   <div className='flex gap-[54px]'>
                     <span className='text-start text-[14px] font-semibold '>
-                      Số lượng mặt hàng: <span className='font-normal'>{filteredPayment.purchase.length}</span>{' '}
+                      Số lượng mặt hàng: <span className='font-normal'>{filteredPayment.purchases.length}</span>{' '}
                     </span>
                     <span className='text-start text-[14px] font-semibold '>
                       Tổng tiền thanh toán:{' '}
@@ -181,7 +185,7 @@ export default function TableHistory() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredPayment.purchase.map((Item: any) => (
+                    {filteredPayment.purchases.map((Item: any) => (
                       <>
                         <tr>
                           <td className='px-4 py-2 text-center'>

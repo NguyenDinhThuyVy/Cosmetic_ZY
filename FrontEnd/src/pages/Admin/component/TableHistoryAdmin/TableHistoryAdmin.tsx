@@ -1,4 +1,4 @@
-import { Button, ConfigProvider, Image, Modal, Select, Table, TableProps, Tag } from 'antd'
+import { Button, ConfigProvider, Image, Modal, Select, Table, TableProps } from 'antd'
 import { useQuery } from 'react-query'
 
 import { Payment } from 'src/types/payment.type'
@@ -118,6 +118,7 @@ export default function TableHistoryAdmin() {
               onChange={handleStatusChange}
               style={{ color: status === 3 ? 'green' : status === 5 ? 'red' : '#e1b86b', width: 170 }}
             >
+              {}
               <option value={1} className='text-red-400 flex gap-8'>
                 <ClockCircleOutlined className='mr-2'></ClockCircleOutlined> Đang chờ xác nhận
               </option>
@@ -192,7 +193,7 @@ export default function TableHistoryAdmin() {
                   </div>
                   <div className='flex gap-[54px]'>
                     <span className='text-start text-[14px] font-semibold '>
-                      Số lượng mặt hàng: <span className='font-normal'>{filteredPayment.purchase.length}</span>{' '}
+                      Số lượng mặt hàng: <span className='font-normal'>{filteredPayment.purchases.length}</span>{' '}
                     </span>
                     <span className='text-start text-[14px] font-semibold '>
                       Tổng tiền thanh toán:{' '}
@@ -211,7 +212,7 @@ export default function TableHistoryAdmin() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredPayment.purchase.map((Item: any) => (
+                    {filteredPayment.purchases.map((Item: any) => (
                       <>
                         <tr>
                           <td className='px-4 py-2 text-center'>

@@ -11,19 +11,13 @@ interface Props {
 
 const ModalOrder: React.FC<Props> = ({ orderdata, visible, onClose, orderId }) => {
   // Tìm chi tiết đơn hàng có orderId tương ứng
-  const orderDetail = orderdata.find((order: Order) => order._id === orderId)
+  const orderDetail: any = orderdata.find((order: Order) => order._id === orderId)
 
   // Kiểm tra nếu không tìm thấy chi tiết đơn hàng thì không hiển thị nội dung
   if (!orderDetail) {
     return null
   }
 
-  console.log(orderDetail)
-  // Tạo đường dẫn hình ảnh
-  const imageUrls = orderDetail.order?.map((orderItem) => {
-    const product = orderItem?.product
-    return product ? 'http://localhost:4000/images/' + product.image : ''
-  })
   return (
     <Modal title={`Chi tiết đơn hàng: `} open={visible} onCancel={onClose} footer={null} width={1100}>
       <table className='table-auto w-full mt-5'>
@@ -37,18 +31,17 @@ const ModalOrder: React.FC<Props> = ({ orderdata, visible, onClose, orderId }) =
           </tr>
         </thead>
         <tbody>
-          {orderDetail.order.map((orderItem, index) => (
+          {orderDetail.data.purchases.map((Item: any) => (
             <>
               <tr>
                 <td className='px-4 py-2 text-center'>
-                  <Image width={120} src={imageUrls[index]} style={{ borderRadius: '5px' }} />
+                  <Image width={80} src={Item.product.image} style={{ borderRadius: '5px' }} />
                 </td>
-                <td className='px-4 py-2'>{orderItem?.product.name}</td>
-                <td className='px-4 py-2 text-center'>{orderItem?.buy_count}</td>
+                <td className='px-4 py-2'>{Item?.product.name}</td>
+                <td className='px-4 py-2 text-center'>{Item?.buy_count}</td>
                 <td className='px-4 py-2 text-center'>
-                  {`${(orderItem?.product?.price * orderItem?.buy_count).toLocaleString()} VND`}
+                  {`${(Item?.product?.price * Item?.buy_count).toLocaleString()} VND`}
                 </td>
-                <td className='px-4 py-2 text-center'>{orderDetail?.shippingAddress[0]?.postalCode}</td>
               </tr>
             </>
           ))}

@@ -26,7 +26,7 @@ function TableDataDelete() {
 
   const categoryName = (filteredInfo?.category as any)?.name
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [selectedRecord, setSelectedRecord] = useState<Product[] | null>(null)
+  const [selectedRecord, setSelectedRecord] = useState<any | null>(null)
   const [form] = Form.useForm()
   const showModal = (record: any) => {
     setSelectedRecord(record)

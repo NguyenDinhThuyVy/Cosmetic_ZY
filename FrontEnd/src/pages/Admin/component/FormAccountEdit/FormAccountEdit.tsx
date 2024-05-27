@@ -64,16 +64,7 @@ const FormAccountEdit: React.FC<CollectionEditFormProps> = ({ userId, onClose, o
       })
     }
   }
-  const maskPhoneNumber = (value) => {
-    // Kiểm tra xem giá trị có ít nhất 4 ký tự không
-    if (value && value.length >= 4) {
-      // Lấy ra 4 ký tự cuối cùng của giá trị
-      const lastFourDigits = value.slice(-4)
-      // Thay thế các ký tự còn lại bằng dấu *
-      return value.slice(0, -4).replace(/./g, '*') + lastFourDigits
-    }
-    return value
-  }
+
   return (
     <Modal
       open={!!userId}

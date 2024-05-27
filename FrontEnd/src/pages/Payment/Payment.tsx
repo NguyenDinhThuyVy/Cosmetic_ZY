@@ -44,7 +44,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
     }
   }
 
-  const { data: purchasesInCartData, refetch } = useQuery({
+  const { refetch } = useQuery({
     queryKey: ['purchases', { status: purchasesStatus.inCart }],
     queryFn: () => purchaseApi.getPurchases({ status: purchasesStatus.inCart })
   })
@@ -59,7 +59,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
 
   const buyProductsMutation = useMutation({
     mutationFn: purchaseApi.buyProducts,
-    onSuccess: (data) => {
+    onSuccess: () => {
       refetch()
     }
   })
