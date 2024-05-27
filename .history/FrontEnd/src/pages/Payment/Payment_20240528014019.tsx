@@ -102,8 +102,8 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
       }, 2500)
     }
   }
-  const total: any = (totalCheckedPurchasePrice / 24000).toFixed(2)
-  console.log(total)
+  // const total: any = (totalCheckedPurchasePrice / 24000).toFixed(2)
+
   return (
     <div>
       <form onSubmit={handleSubmit} className='flex flex-col gap-5 m-5 font'>
