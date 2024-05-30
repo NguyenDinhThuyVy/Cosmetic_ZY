@@ -1,4 +1,4 @@
-import { Button, Image, Modal, Select, Table, TableProps } from 'antd'
+import { Button, Image, Modal, Table, TableProps } from 'antd'
 import { useQuery } from 'react-query'
 
 import { Payment } from 'src/types/payment.type'
