@@ -127,7 +127,7 @@ function ChartWeek() {
   )
 }
 
-function DashboardCard({ title, value, icon }: any) {
+function DashboardCard({ title, value, icon }) {
   return (
     <Card className='w-[200px]'>
       <Space direction='horizontal'>
@@ -186,18 +186,19 @@ function DashboardChartDay() {
         date.setDate(today.getDate() - i)
         return date
       }).reverse()
-      const formattedDays = days.map((date) => date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })) // Format dates as DD/MM/YYYY
+
+      const formattedDays = days.map((date) => date.toLocaleDateString('vi-VN')) // Format dates as DD/MM/YYYY
 
       const revenueByDay = days.map((day) => {
         const dayString = day.toISOString().split('T')[0]
         const filteredPayments = payments.filter(
           (payment) => payment.createdAt.startsWith(dayString) && payment.status === 4
         )
-        const totalRevenue = filteredPayments.reduce((sum, payment: any) => sum + payment.totalMoney, 0) // Sum only the totalMoney of filtered payments
+        const totalRevenue = filteredPayments.reduce((sum, payment) => sum + payment.totalMoney, 0) // Sum only the totalMoney of filtered payments
         return totalRevenue
       })
 
-      setRevenueData((prevData: any) => ({
+      setRevenueData((prevData) => ({
         ...prevData,
         labels: formattedDays,
         datasets: [
@@ -253,7 +254,7 @@ function DashboardChart() {
   })
 
   useEffect(() => {
-    if (paymentData?.data?.data) {
+    if (paymentData?.data.data) {
       const payments = paymentData.data.data
       const currentYear = new Date().getFullYear() // Get the current year
 
@@ -263,9 +264,9 @@ function DashboardChart() {
         return date.toISOString().split('T')[0].slice(0, 7) // Format as YYYY-MM
       })
 
-      const labels = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date(currentYear, i, 1)
-        return date.toLocaleString('en-US', { month: 'long' }).slice(0, 3) // Only first three letters of the month
+      const labels = months.map((month) => {
+        const [year, monthNum]: any = month.split('-')
+        return new Date(year, monthNum - 1).toLocaleString('en-US', { month: 'long' })
       })
 
       const revenueByMonth = months.map((month) => {

@@ -127,7 +127,7 @@ function ChartWeek() {
   )
 }
 
-function DashboardCard({ title, value, icon }: any) {
+function DashboardCard({ title, value, icon }) {
   return (
     <Card className='w-[200px]'>
       <Space direction='horizontal'>
@@ -263,9 +263,9 @@ function DashboardChart() {
         return date.toISOString().split('T')[0].slice(0, 7) // Format as YYYY-MM
       })
 
-      const labels = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date(currentYear, i, 1)
-        return date.toLocaleString('en-US', { month: 'long' }).slice(0, 3) // Only first three letters of the month
+      const labels = months.map((month) => {
+        const [year, monthNum] = month.split('-')
+        return new Date(parseInt(year), parseInt(monthNum) - 1).toLocaleString('en-US', { month: 'long' })
       })
 
       const revenueByMonth = months.map((month) => {
@@ -273,7 +273,7 @@ function DashboardChart() {
           (payment) => payment.createdAt.startsWith(month) && payment.status === 4
         )
 
-        const totalRevenue = filteredPayments.reduce((sum, payment: any) => sum + payment.totalMoney, 0) // Use totalMoney field
+        const totalRevenue = filteredPayments.reduce((sum, payment) => sum + payment.totalMoney, 0) // Use totalMoney field
         return totalRevenue
       })
 

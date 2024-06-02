@@ -127,7 +127,7 @@ function ChartWeek() {
   )
 }
 
-function DashboardCard({ title, value, icon }: any) {
+function DashboardCard({ title, value, icon }) {
   return (
     <Card className='w-[200px]'>
       <Space direction='horizontal'>

@@ -216,7 +216,7 @@ export default function ProductDetail() {
                 </div>
                 <div className='flex gap-1  border-white border-r-gray-200 border-2 pr-3'>
                   <span className='font-semibold'>Mã:</span>
-                  <span>{product?._id.slice(-5)}</span>
+                  <span>5044</span>
                 </div>
                 <div className='flex gap-1'>
                   <span className='font-semibold'>Lượt bán:</span>

@@ -127,7 +127,7 @@ function ChartWeek() {
   )
 }
 
-function DashboardCard({ title, value, icon }: any) {
+function DashboardCard({ title, value, icon }) {
   return (
     <Card className='w-[200px]'>
       <Space direction='horizontal'>
@@ -253,45 +253,47 @@ function DashboardChart() {
   })
 
   useEffect(() => {
-    if (paymentData?.data?.data) {
-      const payments = paymentData.data.data
-      const currentYear = new Date().getFullYear() // Get the current year
+    useEffect(() => {
+      if (paymentData?.data?.data) {
+        const payments = paymentData.data.data;
+        const currentYear = new Date().getFullYear(); // Get the current year
 
-      // Get months for the current year
-      const months = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date(currentYear, i, 1)
-        return date.toISOString().split('T')[0].slice(0, 7) // Format as YYYY-MM
-      })
+        // Get months for the current year
+        const months = Array.from({ length: 12 }, (_, i) => {
+          const date = new Date(currentYear, i, 1);
+          return date.toISOString().split('T')[0].slice(0, 7); // Format as YYYY-MM
+        });
 
-      const labels = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date(currentYear, i, 1)
-        return date.toLocaleString('en-US', { month: 'long' }).slice(0, 3) // Only first three letters of the month
-      })
+        const labels = months.map((month) => {
+          const [year, monthNum] = month.split('-');
+          return new Date(parseInt(year), parseInt(monthNum) - 1).toLocaleString('en-US', { month: 'long' });
+        });
 
-      const revenueByMonth = months.map((month) => {
-        const filteredPayments = payments.filter(
-          (payment) => payment.createdAt.startsWith(month) && payment.status === 4
-        )
+        const revenueByMonth = months.map((month) => {
+          const filteredPayments = payments.filter(
+            (payment) => payment.createdAt.startsWith(month) && payment.status === 4
+          );
 
-        const totalRevenue = filteredPayments.reduce((sum, payment: any) => sum + payment.totalMoney, 0) // Use totalMoney field
-        return totalRevenue
-      })
+          const totalRevenue = filteredPayments.reduce((sum, payment: any) => sum + payment.totalMoney, 0); // Use totalMoney field
+          return totalRevenue;
+        });
 
-      setRevenueData({
-        labels: labels,
-        datasets: [
-          {
-            label: 'Monthly Revenue',
-            data: revenueByMonth,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgb(75, 192, 192)',
-            borderWidth: 1,
-            fill: false
-          }
-        ]
-      })
-    }
-  }, [paymentData])
+        setRevenueData({
+          labels: labels,
+          datasets: [
+            {
+              label: 'Monthly Revenue',
+              data: revenueByMonth,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgb(75, 192, 192)',
+              borderWidth: 1,
+              fill: false
+            }
+          ]
+        });
+      }
+    }, [paymentData]);
+
 
   return (
     <Card style={{ width: 500, height: 250 }}>

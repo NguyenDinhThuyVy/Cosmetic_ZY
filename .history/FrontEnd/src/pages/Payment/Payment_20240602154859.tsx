@@ -253,8 +253,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                       >
                         <PayPalButtons
                           style={{ layout: 'horizontal' }}
-                          createOrder={(data, actions) => {
-                            console.log(data)
+                          createOrder={(actions) => {
                             return actions.order.create({
                               intent: 'CAPTURE', // Thêm thuộc tính intent ở đây
                               purchase_units: [

@@ -254,7 +254,6 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                         <PayPalButtons
                           style={{ layout: 'horizontal' }}
                           createOrder={(data, actions) => {
-                            console.log(data)
                             return actions.order.create({
                               intent: 'CAPTURE', // Thêm thuộc tính intent ở đây
                               purchase_units: [
@@ -267,7 +266,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                               ]
                             })
                           }}
-                          onApprove={(actions: any) => {
+                          onApprove={(data: any, actions: any) => {
                             // Khai báo kiểu dữ liệu là any hoặc kiểu dữ liệu phù hợp với ứng dụng của bạn
                             return actions.order.capture().then((details: any) => {
                               console.log('Transaction completed by ' + details.payer.name.given_name)

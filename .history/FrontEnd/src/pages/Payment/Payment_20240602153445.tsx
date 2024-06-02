@@ -105,7 +105,13 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
   const total: any = (totalCheckedPurchasePrice / 24000).toFixed(2)
 
   // Xử lý sự kiện khi thanh toán thành công
-
+  const handlePaymentSuccess = (data, actions) => {
+    return actions.order.capture().then((details) => {
+      console.log('Payment Approved: ', details)
+      setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))
+      // Bạn có thể thêm bất kỳ xử lý logic nào ở đây, ví dụ như cập nhật trạng thái đơn hàng trong cơ sở dữ liệu của bạn.
+    })
+  }
   return (
     <div>
       <form onSubmit={handleSubmit} className='flex flex-col gap-5 m-5 font'>
@@ -246,15 +252,10 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
 
                   {showPayPalButton && (
                     <div className='flex flex-col gap-4 border-2 border-gray-100 rounded-lg p-5 h-[140px] w-full overflow-hidden'>
-                      <PayPalScriptProvider
-                        options={{
-                          clientId: 'AcOq3RkWYOLeq6hxAwkXFv4jenjO_oCS8qKKWQigf5Sy1O_QtRwQMeBRqylsZ7y3EG85Miv9EtGrtkwu'
-                        }}
-                      >
+                      <PayPalScriptProvider options={{ clientId: 'your-client-id' }}>
                         <PayPalButtons
                           style={{ layout: 'horizontal' }}
                           createOrder={(data, actions) => {
-                            console.log(data)
                             return actions.order.create({
                               intent: 'CAPTURE', // Thêm thuộc tính intent ở đây
                               purchase_units: [
@@ -267,9 +268,8 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                               ]
                             })
                           }}
-                          onApprove={(actions: any) => {
-                            // Khai báo kiểu dữ liệu là any hoặc kiểu dữ liệu phù hợp với ứng dụng của bạn
-                            return actions.order.capture().then((details: any) => {
+                          onApprove={(data, actions) => {
+                            return actions.order.capture().then((details) => {
                               console.log('Transaction completed by ' + details.payer.name.given_name)
                               // Gọi hàm xử lý thành công ở đây
                               setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))

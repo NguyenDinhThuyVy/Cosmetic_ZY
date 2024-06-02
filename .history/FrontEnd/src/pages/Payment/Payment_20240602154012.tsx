@@ -105,7 +105,13 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
   const total: any = (totalCheckedPurchasePrice / 24000).toFixed(2)
 
   // Xử lý sự kiện khi thanh toán thành công
-
+  const handlePaymentSuccess = (data, actions) => {
+    return actions.order.capture().then((details) => {
+      console.log('Payment Approved: ', details)
+      setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))
+      // Bạn có thể thêm bất kỳ xử lý logic nào ở đây, ví dụ như cập nhật trạng thái đơn hàng trong cơ sở dữ liệu của bạn.
+    })
+  }
   return (
     <div>
       <form onSubmit={handleSubmit} className='flex flex-col gap-5 m-5 font'>
@@ -254,7 +260,6 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                         <PayPalButtons
                           style={{ layout: 'horizontal' }}
                           createOrder={(data, actions) => {
-                            console.log(data)
                             return actions.order.create({
                               intent: 'CAPTURE', // Thêm thuộc tính intent ở đây
                               purchase_units: [
@@ -267,7 +272,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                               ]
                             })
                           }}
-                          onApprove={(actions: any) => {
+                          onApprove={(data: any, actions: any) => {
                             // Khai báo kiểu dữ liệu là any hoặc kiểu dữ liệu phù hợp với ứng dụng của bạn
                             return actions.order.capture().then((details: any) => {
                               console.log('Transaction completed by ' + details.payer.name.given_name)

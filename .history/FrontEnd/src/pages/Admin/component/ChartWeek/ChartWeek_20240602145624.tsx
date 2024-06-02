@@ -127,7 +127,7 @@ function ChartWeek() {
   )
 }
 
-function DashboardCard({ title, value, icon }: any) {
+function DashboardCard({ title, value, icon }) {
   return (
     <Card className='w-[200px]'>
       <Space direction='horizontal'>
@@ -265,7 +265,7 @@ function DashboardChart() {
 
       const labels = Array.from({ length: 12 }, (_, i) => {
         const date = new Date(currentYear, i, 1)
-        return date.toLocaleString('en-US', { month: 'long' }).slice(0, 3) // Only first three letters of the month
+        return date.toLocaleString('en-US', { month: 'long' })
       })
 
       const revenueByMonth = months.map((month) => {

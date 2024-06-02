@@ -216,11 +216,11 @@ export default function ProductDetail() {
                 </div>
                 <div className='flex gap-1  border-white border-r-gray-200 border-2 pr-3'>
                   <span className='font-semibold'>Mã:</span>
-                  <span>{product?._id.slice(-5)}</span>
+                  <span>5044</span>
                 </div>
                 <div className='flex gap-1'>
                   <span className='font-semibold'>Lượt bán:</span>
-                  <span>{product?.sold}</span>
+                  <span>50.44k</span>
                 </div>
               </div>
               {product.price_before_discount != product.price ? (
@@ -243,7 +243,7 @@ export default function ProductDetail() {
               )}
               <div className='border-gradient rounded-lg p-2 mt-4 flex flex-col gap-1 w-[740px] h-[200px]'>
                 <div className='font-bold text-[15px]'>Công dụng :</div>
-                <p className='line-clamp-6' dangerouslySetInnerHTML={{ __html: sanitizedDescription } as any}></p>
+                <p className='line-clamp-6'>{product.uses}</p>
               </div>
               <div className='mt-2'>
                 <AddPurchase product={product} addToCart={addToCart} buyNow={buyNow} />

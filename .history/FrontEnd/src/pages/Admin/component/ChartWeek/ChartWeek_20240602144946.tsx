@@ -127,7 +127,7 @@ function ChartWeek() {
   )
 }
 
-function DashboardCard({ title, value, icon }: any) {
+function DashboardCard({ title, value, icon }) {
   return (
     <Card className='w-[200px]'>
       <Space direction='horizontal'>
@@ -253,7 +253,7 @@ function DashboardChart() {
   })
 
   useEffect(() => {
-    if (paymentData?.data?.data) {
+    if (paymentData?.data.data) {
       const payments = paymentData.data.data
       const currentYear = new Date().getFullYear() // Get the current year
 
@@ -263,9 +263,9 @@ function DashboardChart() {
         return date.toISOString().split('T')[0].slice(0, 7) // Format as YYYY-MM
       })
 
-      const labels = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date(currentYear, i, 1)
-        return date.toLocaleString('en-US', { month: 'long' }).slice(0, 3) // Only first three letters of the month
+      const labels = months.map((month) => {
+        const [year, monthNum]: any = month.split('-')
+        return new Date(year, monthNum - 1).toLocaleString('en-US', { month: 'long' })
       })
 
       const revenueByMonth = months.map((month) => {
