@@ -268,7 +268,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                             })
                           }}
                           onApprove={(data, actions: any) => {
-                            console.log(data)
+                            // Khai báo kiểu dữ liệu là any hoặc kiểu dữ liệu phù hợp với ứng dụng của bạn
                             return actions.order.capture().then((details: any) => {
                               console.log('Transaction completed by ' + details.payer.name.given_name)
                               // Gọi hàm xử lý thành công ở đây
