@@ -65,7 +65,7 @@ export default function FormAI() {
       setIsSubmitting(false)
     },
     onError: () => {
-      // toast.error('Có lỗi xảy ra, vui lòng thử lại', { autoClose: 1200 })
+      toast.error('Có lỗi xảy ra, vui lòng thử lại', { autoClose: 1200 })
       setIsSubmitting(true)
     }
   })

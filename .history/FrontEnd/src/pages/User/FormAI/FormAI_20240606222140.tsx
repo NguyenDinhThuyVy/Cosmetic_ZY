@@ -64,9 +64,9 @@ export default function FormAI() {
       localStorage.setItem('Id_form', res.data.data._id)
       setIsSubmitting(false)
     },
-    onError: () => {
-      // toast.error('Có lỗi xảy ra, vui lòng thử lại', { autoClose: 1200 })
-      setIsSubmitting(true)
+    onError: (error: any) => {
+      toast.error('Có lỗi xảy ra, vui lòng thử lại', { autoClose: 1200 })
+      setIsSubmitting(false)
     }
   })
 
