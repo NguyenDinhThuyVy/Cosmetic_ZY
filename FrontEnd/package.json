@@ -27,6 +27,7 @@
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "classnames": "^2.5.1",
+    "date-fns": "^3.6.0",
     "dompurify": "^3.1.2",
     "framer-motion": "^11.0.25",
     "immer": "^10.1.1",
