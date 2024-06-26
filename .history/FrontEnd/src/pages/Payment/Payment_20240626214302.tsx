@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, useRef } from 'react'
 import purchaseApi from 'src/apis/purchase.api'
 import { toast } from 'react-toastify'
 import { useMutation, useQuery } from 'react-query'
@@ -20,7 +20,7 @@ interface Props {
 export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, onPaymentSuccess }: Props) {
   const [isPayPalButtonSuccess, setIsPayPalButtonSuccess] = useState(false)
   const [showPayPalButton, setShowPayPalButton] = useState(false)
-  const [isPaid, setIsPaid] = useState(false)
+  const completeButtonRef = useRef(null)
   const [payment, setPayment] = useState({
     street: '',
     totalMoney: 0,
@@ -226,7 +226,6 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                             setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 0 }))
                             setShowPayPalButton(false)
                           }}
-                          disabled={isPaid} // Vô hiệu hóa nút radio khi thanh toán thành công
                         >
                           <span>Thanh toán khi nhận hàng</span>
                         </Radio>
@@ -244,8 +243,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                       </div>
                     </Radio.Group>
                   </ConfigProvider>
-
-                  {showPayPalButton && !isPaid && (
+                  {showPayPalButton && (
                     <div className='flex flex-col gap-4 border-2 border-gray-100 rounded-lg p-5 h-[140px] w-full overflow-hidden'>
                       <PayPalScriptProvider
                         options={{
@@ -257,24 +255,27 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                           createOrder={(data, actions) => {
                             console.log(data)
                             return actions.order.create({
-                              intent: 'CAPTURE', // Thêm thuộc tính intent ở đây
+                              intent: 'CAPTURE',
                               purchase_units: [
                                 {
                                   amount: {
-                                    currency_code: 'USD', // Mã tiền tệ
-                                    value: total.toString() // Giả định 'total' là biến chứa tổng tiền
+                                    currency_code: 'USD',
+                                    value: total.toString()
                                   }
                                 }
                               ]
                             })
                           }}
-                          onApprove={(data, actions: any) => {
+                          onApprove={(data, actions) => {
                             console.log(data)
-                            return actions.order.capture().then((details: any) => {
+                            return actions.order.capture().then((details) => {
                               console.log('Transaction completed by ' + details.payer.name.given_name)
                               // Gọi hàm xử lý thành công ở đây
                               setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))
-                              setIsPaid(true)
+                              // Tự động nhấn nút "Complete" sau khi thanh toán thành công
+                              if (completeButtonRef.current) {
+                                completeButtonRef.current.click()
+                              }
                             })
                           }}
                         />

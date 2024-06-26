@@ -92,14 +92,14 @@ export default function TableHistory() {
             color = 'orange' // orange
             break
           case 4:
-            statusText = 'Giao Thành công'
+            statusText = 'Đang giao'
             icon = <FaCarSide />
-            color = 'green' // yellow
+            color = 'gold' // yellow
             break
           case 5:
-            statusText = 'Đã bị hủy'
+            statusText = 'Thành công'
             icon = <SmileOutlined />
-            color = 'red' // green
+            color = 'green' // green
             break
           default:
             statusText = 'Không xác định'

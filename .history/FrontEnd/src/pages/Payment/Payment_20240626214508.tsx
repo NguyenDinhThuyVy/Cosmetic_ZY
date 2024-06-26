@@ -20,7 +20,7 @@ interface Props {
 export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, onPaymentSuccess }: Props) {
   const [isPayPalButtonSuccess, setIsPayPalButtonSuccess] = useState(false)
   const [showPayPalButton, setShowPayPalButton] = useState(false)
-  const [isPaid, setIsPaid] = useState(false)
+
   const [payment, setPayment] = useState({
     street: '',
     totalMoney: 0,
@@ -226,7 +226,6 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                             setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 0 }))
                             setShowPayPalButton(false)
                           }}
-                          disabled={isPaid} // Vô hiệu hóa nút radio khi thanh toán thành công
                         >
                           <span>Thanh toán khi nhận hàng</span>
                         </Radio>
@@ -245,7 +244,7 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                     </Radio.Group>
                   </ConfigProvider>
 
-                  {showPayPalButton && !isPaid && (
+                  {showPayPalButton && (
                     <div className='flex flex-col gap-4 border-2 border-gray-100 rounded-lg p-5 h-[140px] w-full overflow-hidden'>
                       <PayPalScriptProvider
                         options={{
@@ -274,7 +273,6 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                               console.log('Transaction completed by ' + details.payer.name.given_name)
                               // Gọi hàm xử lý thành công ở đây
                               setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))
-                              setIsPaid(true)
                             })
                           }}
                         />

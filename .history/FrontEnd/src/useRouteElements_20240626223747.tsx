@@ -40,14 +40,14 @@ function RejectedRoute() {
   return !isAuthenticated ? <Outlet /> : <Navigate to='/' />
 }
 function AdminRejectedRoute() {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, user } = useContext(AppContext)
   const { data: profileData } = useQuery({
     queryKey: ['profile'],
     queryFn: userApi.getProfile
   })
   const profile = profileData?.data.data
 
-  return isAuthenticated && profile && profile.roles.includes('Admin') ? <Outlet /> : <Navigate to='/login' />
+  return isAuthenticated && user && user.roles.includes('Admin') ? <Outlet /> : <Navigate to='/login' />
 }
 export default function useRouteElements() {
   const routeElements = useRoutes([

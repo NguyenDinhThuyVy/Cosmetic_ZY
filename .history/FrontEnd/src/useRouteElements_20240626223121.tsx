@@ -28,8 +28,6 @@ import FilterBrand from './pages/FIlterProduct/FilterBrand'
 import RecycelBin from './pages/Admin/pages/RecycelBin'
 import AdminProfile from './pages/Admin/pages/AdminProfile'
 import Brands from './pages/Admin/pages/Brands'
-import { useQuery } from 'react-query'
-import userApi from './apis/user.api'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -40,14 +38,9 @@ function RejectedRoute() {
   return !isAuthenticated ? <Outlet /> : <Navigate to='/' />
 }
 function AdminRejectedRoute() {
-  const { isAuthenticated } = useContext(AppContext)
-  const { data: profileData } = useQuery({
-    queryKey: ['profile'],
-    queryFn: userApi.getProfile
-  })
-  const profile = profileData?.data.data
+  const { isAuthenticated, user } = useContext(AppContext)
 
-  return isAuthenticated && profile && profile.roles.includes('Admin') ? <Outlet /> : <Navigate to='/login' />
+  return isAuthenticated && user ? <Outlet /> : <Navigate to='/login' />
 }
 export default function useRouteElements() {
   const routeElements = useRoutes([

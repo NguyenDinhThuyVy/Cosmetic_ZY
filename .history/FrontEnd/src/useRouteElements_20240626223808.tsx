@@ -40,7 +40,7 @@ function RejectedRoute() {
   return !isAuthenticated ? <Outlet /> : <Navigate to='/' />
 }
 function AdminRejectedRoute() {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, user } = useContext(AppContext)
   const { data: profileData } = useQuery({
     queryKey: ['profile'],
     queryFn: userApi.getProfile

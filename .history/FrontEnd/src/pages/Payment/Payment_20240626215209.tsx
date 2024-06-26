@@ -226,7 +226,6 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                             setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 0 }))
                             setShowPayPalButton(false)
                           }}
-                          disabled={isPaid} // Vô hiệu hóa nút radio khi thanh toán thành công
                         >
                           <span>Thanh toán khi nhận hàng</span>
                         </Radio>

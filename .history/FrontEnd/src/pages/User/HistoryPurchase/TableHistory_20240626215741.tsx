@@ -99,7 +99,7 @@ export default function TableHistory() {
           case 5:
             statusText = 'Đã bị hủy'
             icon = <SmileOutlined />
-            color = 'red' // green
+            color = 'green' // green
             break
           default:
             statusText = 'Không xác định'

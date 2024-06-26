@@ -20,7 +20,7 @@ interface Props {
 export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, onPaymentSuccess }: Props) {
   const [isPayPalButtonSuccess, setIsPayPalButtonSuccess] = useState(false)
   const [showPayPalButton, setShowPayPalButton] = useState(false)
-  const [isPaid, setIsPaid] = useState(false)
+  const completeButtonRef = useRef(null)
   const [payment, setPayment] = useState({
     street: '',
     totalMoney: 0,
@@ -226,7 +226,6 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                             setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 0 }))
                             setShowPayPalButton(false)
                           }}
-                          disabled={isPaid} // Vô hiệu hóa nút radio khi thanh toán thành công
                         >
                           <span>Thanh toán khi nhận hàng</span>
                         </Radio>
@@ -244,43 +243,44 @@ export default function Payment({ checkedPurchases, totalCheckedPurchasePrice, o
                       </div>
                     </Radio.Group>
                   </ConfigProvider>
-
-                  {showPayPalButton && !isPaid && (
-                    <div className='flex flex-col gap-4 border-2 border-gray-100 rounded-lg p-5 h-[140px] w-full overflow-hidden'>
-                      <PayPalScriptProvider
-                        options={{
-                          clientId: 'AcOq3RkWYOLeq6hxAwkXFv4jenjO_oCS8qKKWQigf5Sy1O_QtRwQMeBRqylsZ7y3EG85Miv9EtGrtkwu'
-                        }}
-                      >
-                        <PayPalButtons
-                          style={{ layout: 'horizontal' }}
-                          createOrder={(data, actions) => {
-                            console.log(data)
-                            return actions.order.create({
-                              intent: 'CAPTURE', // Thêm thuộc tính intent ở đây
-                              purchase_units: [
-                                {
-                                  amount: {
-                                    currency_code: 'USD', // Mã tiền tệ
-                                    value: total.toString() // Giả định 'total' là biến chứa tổng tiền
-                                  }
-                                }
-                              ]
-                            })
-                          }}
-                          onApprove={(data, actions: any) => {
-                            console.log(data)
-                            return actions.order.capture().then((details: any) => {
-                              console.log('Transaction completed by ' + details.payer.name.given_name)
-                              // Gọi hàm xử lý thành công ở đây
-                              setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }))
-                              setIsPaid(true)
-                            })
-                          }}
-                        />
-                      </PayPalScriptProvider>
-                    </div>
-                  )}
+                  {showPayPalButton && (
+        <div className='flex flex-col gap-4 border-2 border-gray-100 rounded-lg p-5 h-[140px] w-full overflow-hidden'>
+          <PayPalScriptProvider
+            options={{
+              clientId: 'AcOq3RkWYOLeq6hxAwkXFv4jenjO_oCS8qKKWQigf5Sy1O_QtRwQMeBRqylsZ7y3EG85Miv9EtGrtkwu'
+            }}
+          >
+            <PayPalButtons
+              style={{ layout: 'horizontal' }}
+              createOrder={(data, actions) => {
+                console.log(data);
+                return actions.order.create({
+                  intent: 'CAPTURE',
+                  purchase_units: [
+                    {
+                      amount: {
+                        currency_code: 'USD',
+                        value: total.toString()
+                      }
+                    }
+                  ]
+                });
+              }}
+              onApprove={(data, actions) => {
+                console.log(data);
+                return actions.order.capture().then((details) => {
+                  console.log('Transaction completed by ' + details.payer.name.given_name);
+                  // Gọi hàm xử lý thành công ở đây
+                  setPayment((prevPayment) => ({ ...prevPayment, paymentMethod: 1 }));
+                  // Tự động nhấn nút "Complete" sau khi thanh toán thành công
+                  if (completeButtonRef.current) {
+                    completeButtonRef.current.click();
+                  }
+                });
+              }}
+            />
+          </PayPalScriptProvider>
+        </div>
                 </div>
               </div>
               <button
