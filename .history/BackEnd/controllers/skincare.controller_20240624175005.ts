@@ -10,12 +10,12 @@ async function callAIRecommendationAPI(SkincareData) {
       'http://127.0.0.1:8000/recommend',
       SkincareData
     )
-    // console.log(response)
+    console.log(response)
 
     return {
       aiRecommendationIds: response.data[0],
       additionalData: response.data[1],
-      reasoning: response.data[2],
+      reson
     }
   } catch (error) {
     console.error(
@@ -48,7 +48,7 @@ async function getProductsDetails(productIds) {
 const createSkincareForm = async (req: Request, res: Response) => {
   try {
     const formData = req.body
-    const { aiRecommendationIds, additionalData, reasoning } =
+    const { aiRecommendationIds, additionalData } =
       await callAIRecommendationAPI(formData)
 
     const productsDetails = await getProductsDetails(aiRecommendationIds)
@@ -58,11 +58,9 @@ const createSkincareForm = async (req: Request, res: Response) => {
       ...formData,
       aiRecommendation: aiRecommendationIds,
       additionalData: additionalData,
-      reasoning: reasoning,
     })
 
     const savedSkincareForm = await skincareForm.save()
-    console.log(savedSkincareForm)
 
     return res.status(201).json({
       message: 'Skincare form created successfully, recommendation received',

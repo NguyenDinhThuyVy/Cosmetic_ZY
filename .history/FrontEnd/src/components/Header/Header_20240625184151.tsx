@@ -100,9 +100,6 @@ function Header() {
   }, [paymentData, viewedPayments])
 
   useEffect(() => {
-    // Show the notification
-    setIsVisible(true)
-
     // Hide the notification after 3 seconds
     const timer = setTimeout(() => {
       setIsVisible(false)
@@ -113,17 +110,8 @@ function Header() {
       clearTimeout(timer)
     }
   }, [])
-
   return (
     <header className='font'>
-      <div className='fixed top-0 left-1/2 transform -translate-x-1/2 mt-16 w-64 rounded-md overflow-hidden bg-white shadow-lg opacity-0 transition-opacity duration-500 ease-in-out'>
-        <div className='relative bg-blue-500 py-2'>
-          <div className='w-2 h-2 bg-blue-500 rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 animate-ping'></div>
-        </div>
-        <div className={`py-4 px-6 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}>
-          <p className='text-gray-800'>hihi</p>
-        </div>
-      </div>
       <div className='flex py-5 px-8  items-center gap-12 justify-center'>
         <div className='logo w-1/6'>
           <Link to={path.home}>

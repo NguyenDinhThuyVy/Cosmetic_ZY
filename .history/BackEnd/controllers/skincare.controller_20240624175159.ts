@@ -62,7 +62,6 @@ const createSkincareForm = async (req: Request, res: Response) => {
     })
 
     const savedSkincareForm = await skincareForm.save()
-    console.log(savedSkincareForm)
 
     return res.status(201).json({
       message: 'Skincare form created successfully, recommendation received',

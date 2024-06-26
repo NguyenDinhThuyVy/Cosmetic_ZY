@@ -40,7 +40,6 @@ interface SkincareForm {
   skin_condition: string[]
   desired_improv: string[]
   additionalData: string
-  reasoning: string
 }
 
 export default function FormAI() {
@@ -58,8 +57,7 @@ export default function FormAI() {
     skin_type: '',
     skin_condition: [],
     desired_improv: [],
-    additionalData: '',
-    reasoning: ''
+    additionalData: ''
   })
 
   const createHealthFormMutation = useMutation({
@@ -309,7 +307,7 @@ export default function FormAI() {
               Lời khuyên:{' '}
               <div className='font-normal px-4'>
                 <ul className='list-disc'>
-                  <li>{data?.additionalData}</li>
+                  <li>{data?.reasoning}</li>
                 </ul>
               </div>{' '}
             </div>

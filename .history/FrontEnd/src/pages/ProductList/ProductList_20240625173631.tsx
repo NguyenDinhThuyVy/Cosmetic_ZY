@@ -6,7 +6,7 @@ import FlashSale from 'src/components/FlashSale'
 import Brand from 'src/components/Brand'
 import ProductTop from 'src/components/ProductTop'
 import Poster from 'src/components/Poster'
-
+import ProductSeen from 'src/components/ProductSeen'
 import path from 'src/constants/path'
 
 import { useQuery } from 'react-query'
@@ -223,7 +223,7 @@ export default function ProductList() {
           <div className='my-10 mx-28 w-5/6'>
             <div className='flex flex-col gap-2 items-center justify-center '>
               <div className='text-center text-2xl font-semibold uppercase mt-6 '>CÁC MẪU mới nhất</div>
-              <ProductTop data={productsData.data.data.products} name='createdAt'></ProductTop>
+              <ProductSeen data={productsData.data.data.products}></ProductSeen>
             </div>
           </div>
         )}

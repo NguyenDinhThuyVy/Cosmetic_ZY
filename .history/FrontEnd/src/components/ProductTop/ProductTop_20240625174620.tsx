@@ -12,7 +12,7 @@ interface Props {
 interface Item {
   sold: number
   view: number
-  createdAt: string
+  createdAt: number
 }
 function ProductTop({ data, name }: Props) {
   const [listItem, setListItem] = useState<Item[]>([])
@@ -41,19 +41,17 @@ function ProductTop({ data, name }: Props) {
       >
         {listItem?.length > 0 &&
           listItem
-            .slice() // Tạo một bản sao của mảng để không làm thay đổi mảng gốc
-            .sort((a, b) => {
+            ?.sort((a, b) => {
               if (name === 'sold') {
                 return b.sold - a.sold
               } else if (name === 'view') {
                 return b.view - a.view
               } else if (name === 'createdAt') {
-                // Chuyển đổi chuỗi thời gian thành đối tượng Date để so sánh
-                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                return b.createdAt - a.createdAt // Nếu name không phải là 'sold' hoặc 'view', không sắp xếp
               }
-              return 0 // Nếu name không phải là 'sold', 'view', hoặc 'createdAt', không sắp xếp
+              return 0
             })
-            .slice(0, 10) // Chọn chỉ lấy 10 sản phẩm đầu tiên sau khi đã sắp xếp
+            .slice(0, 10)
             .map((product, index) => (
               <SwiperSlide key={index}>
                 <ItemTop products={product} />

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
 import 'src/Styles/Header.scss'
-
+import { ConfigProvider, Select } from 'antd'
 import Popover from '../Popover'
 
 import { useContext, useEffect, useState } from 'react'
@@ -23,7 +23,6 @@ function Header() {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const [notifications, setNotifications] = useState<string[]>([])
   const [viewedPayments, setViewedPayments] = useState<string[]>([]) // Xác định rõ kiểu dữ liệu ở đây
-  const [isVisible, setIsVisible] = useState(true)
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
@@ -35,7 +34,20 @@ function Header() {
   const handleLogout = () => {
     logoutMutation.mutate()
   }
-
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`)
+  }
+  const myTheme = {
+    components: {
+      Select: {
+        colorPrimaryHover: '#fa913c',
+        colorPrimary: '#fa913c',
+        colorBorder: '#e07925',
+        optionSelectedBg: '#ff8e8eaa',
+        colorText: '#939292'
+      }
+    }
+  }
   const { data: purchasesInCartData } = useQuery({
     queryKey: ['purchases', { status: purchasesStatus.inCart }],
     queryFn: () => purchaseApi.getPurchases({ status: purchasesStatus.inCart }),
@@ -99,31 +111,9 @@ function Header() {
     }
   }, [paymentData, viewedPayments])
 
-  useEffect(() => {
-    // Show the notification
-    setIsVisible(true)
-
-    // Hide the notification after 3 seconds
-    const timer = setTimeout(() => {
-      setIsVisible(false)
-    }, 3000)
-
-    // Clear the timer when component unmounts or isVisible becomes false
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [])
-
+  // console.log(paymentData)
   return (
     <header className='font'>
-      <div className='fixed top-0 left-1/2 transform -translate-x-1/2 mt-16 w-64 rounded-md overflow-hidden bg-white shadow-lg opacity-0 transition-opacity duration-500 ease-in-out'>
-        <div className='relative bg-blue-500 py-2'>
-          <div className='w-2 h-2 bg-blue-500 rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 animate-ping'></div>
-        </div>
-        <div className={`py-4 px-6 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}>
-          <p className='text-gray-800'>hihi</p>
-        </div>
-      </div>
       <div className='flex py-5 px-8  items-center gap-12 justify-center'>
         <div className='logo w-1/6'>
           <Link to={path.home}>
@@ -181,6 +171,20 @@ function Header() {
                 </div>
               </div>
             </Link>
+          </div>
+          <div className='flex-grow-1'>
+            <div className='flex flex-wrap gap-2  text-gray-500  items-center font-semibold'>
+              <Link to='/'>
+                {' '}
+                <div className='flex flex-wrap gap-3 items-center text-red-400'>
+                  <FaPhone className='text-3xl' />
+                  <div className='flex flex-col gap-1 '>
+                    <span className='text-gray-400 font-medium text-sm '>Hỗ trợ khách hàng</span>
+                    <span className='text-gray-500 font-semibold text-sm '>1950.6750</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
 
           <div className='flex-grow-1'>

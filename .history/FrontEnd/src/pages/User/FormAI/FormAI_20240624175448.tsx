@@ -309,7 +309,7 @@ export default function FormAI() {
               Lời khuyên:{' '}
               <div className='font-normal px-4'>
                 <ul className='list-disc'>
-                  <li>{data?.additionalData}</li>
+                  <li>{data?.reasoning}</li>
                 </ul>
               </div>{' '}
             </div>

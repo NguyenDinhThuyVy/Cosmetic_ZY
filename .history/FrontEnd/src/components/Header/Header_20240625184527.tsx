@@ -121,7 +121,7 @@ function Header() {
           <div className='w-2 h-2 bg-blue-500 rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 animate-ping'></div>
         </div>
         <div className={`py-4 px-6 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}>
-          <p className='text-gray-800'>hihi</p>
+          <p className='text-gray-800'>{message}</p>
         </div>
       </div>
       <div className='flex py-5 px-8  items-center gap-12 justify-center'>
