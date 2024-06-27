@@ -1,12 +1,13 @@
-import { Space, Table, Tag } from 'antd'
+import { Modal, Space, Table, Tag, message } from 'antd'
 import type { TableProps } from 'antd'
 import { Link } from 'react-router-dom'
 import adminApi from 'src/apis/admin.api'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { User } from 'src/types/user.type'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import { useEffect, useState } from 'react'
 import FormAccountEdit from '../FormAccountEdit'
+import { MdDelete } from 'react-icons/md'
 import { AiFillEdit } from 'react-icons/ai'
 
 function FormAccount() {
@@ -104,7 +105,7 @@ function FormAccount() {
     setShouldRefetch(true) // Trigger fetchData khi cập nhật thành công
   }
 
-  const { data: usersData } = useQuery({
+  const { data: usersData, refetch } = useQuery({
     queryKey: ['users', queryConfig],
     queryFn: () => {
       return adminApi.getAllUser()

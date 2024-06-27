@@ -264,7 +264,11 @@ export default function ProductDetail() {
               )}
               <div className='border-gradient rounded-lg p-2 mt-4 flex flex-col gap-1 w-[740px] h-[200px]'>
                 <div className='font-bold text-[15px]'>Công dụng :</div>
-
+                <p className='line-clamp-6'>
+                  Dưới đây là công dụng của sản phẩm. Bạn nên xem xét kỹ công dụng của từng sản phẩm để biết bản thân
+                  mình phù hơp với loại sản phẩm nào, và hiệu quả của sản phẩm đó trên da của chúng ta. {product.uses} .
+                  Chúc các bạn mãi xinh đẹp . Hãy luôn yêu thương bản thân mình nhé !
+                </p>
                 <p className='line-clamp-6' dangerouslySetInnerHTML={{ __html: sanitizedDescription } as any}></p>
               </div>
               <div className='mt-2'>

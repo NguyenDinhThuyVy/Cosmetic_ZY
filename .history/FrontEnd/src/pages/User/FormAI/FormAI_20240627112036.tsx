@@ -128,6 +128,8 @@ export default function FormAI() {
   const handleCancel = () => {
     setIsModalVisible(false)
   }
+  const idForm = localStorage.getItem('Id_form')
+  const isDisabled = !profileData?.data?.data?._id || profileData.data.data._id !== idForm
 
   return (
     <div className='rounded-md bg-white px-2 pb-10 shadow md:px-7 md:pb-20 font relative '>
@@ -255,7 +257,7 @@ export default function FormAI() {
         <button
           onClick={() => showModal()}
           className=' text-gray-100  rounded-full bg-gradient-to-r from-[#f0a80edb] via-[#c43131d8] to-[#671f57d1] w-[140px] flex justify-center items-center p-3'
-          disabled={!localStorage.getItem('Id_form')}
+          disabled={isDisabled}
         >
           Xem chi tiết
         </button>

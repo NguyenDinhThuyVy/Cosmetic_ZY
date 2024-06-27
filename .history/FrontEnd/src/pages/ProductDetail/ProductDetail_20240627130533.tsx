@@ -127,6 +127,8 @@ export default function ProductDetail() {
     imageRef.current?.removeAttribute('style')
   }
 
+
+
   const addToCart = () => {
     addToCartMutation.mutate(
       { buy_count: buyCount, product_id: product?._id as string },
@@ -265,7 +267,6 @@ export default function ProductDetail() {
               <div className='border-gradient rounded-lg p-2 mt-4 flex flex-col gap-1 w-[740px] h-[200px]'>
                 <div className='font-bold text-[15px]'>Công dụng :</div>
 
-                <p className='line-clamp-6' dangerouslySetInnerHTML={{ __html: sanitizedDescription } as any}></p>
               </div>
               <div className='mt-2'>
                 <AddPurchase

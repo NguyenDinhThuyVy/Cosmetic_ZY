@@ -1,4 +1,4 @@
-import { Space, Table, Tag } from 'antd'
+import { Modal, Space, Table, Tag, message } from 'antd'
 import type { TableProps } from 'antd'
 import { Link } from 'react-router-dom'
 import adminApi from 'src/apis/admin.api'

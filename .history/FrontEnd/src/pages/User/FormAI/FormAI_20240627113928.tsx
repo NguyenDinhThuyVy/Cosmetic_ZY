@@ -8,6 +8,20 @@ import { Link } from 'react-router-dom'
 import path from 'src/constants/path'
 import { generateNameId } from 'src/utils/utils'
 type SizeType = ConfigProviderProps['componentSize']
+type CategoryMap = {
+  '3': {
+    '6630b96d64d8fa096524aa32': number
+    '6630b95d64d8fa096524aa31': number
+    '6630afa40cb55804581770c0': number
+  }
+  '5': {
+    '6630b96d64d8fa096524aa32': number
+    '6630b95d64d8fa096524aa31': number
+    '6630b94064d8fa096524aa2f': number
+    '6630b92364d8fa096524aa2d': number
+    '6630afa40cb55804581770c0': number
+  }
+}
 const options: SelectProps['options'] = [
   { label: 'mụn ẩn', value: 'mụn ẩn' },
   { label: 'mụn viêm', value: 'mụn viêm' },
@@ -128,7 +142,24 @@ export default function FormAI() {
   const handleCancel = () => {
     setIsModalVisible(false)
   }
+  const getCategoryStep = (category: string, productCount: keyof CategoryMap): number | '' => {
+    const categories: CategoryMap = {
+      '3': {
+        '6630b96d64d8fa096524aa32': 1,
+        '6630b95d64d8fa096524aa31': 2,
+        '6630afa40cb55804581770c0': 3
+      },
+      '5': {
+        '6630b96d64d8fa096524aa32': 1,
+        '6630b95d64d8fa096524aa31': 2,
+        '6630b94064d8fa096524aa2f': 3,
+        '6630b92364d8fa096524aa2d': 4,
+        '6630afa40cb55804581770c0': 5
+      }
+    }
 
+    return categories[productCount]?.[category] || ''
+  }
   return (
     <div className='rounded-md bg-white px-2 pb-10 shadow md:px-7 md:pb-20 font relative '>
       <div className='border-b border-b-gray-200 py-6 relative'>

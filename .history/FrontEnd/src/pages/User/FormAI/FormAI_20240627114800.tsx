@@ -8,6 +8,21 @@ import { Link } from 'react-router-dom'
 import path from 'src/constants/path'
 import { generateNameId } from 'src/utils/utils'
 type SizeType = ConfigProviderProps['componentSize']
+type Category3 = {
+  '6630b96d64d8fa096524aa32': number
+  '6630b95d64d8fa096524aa31': number
+  '6630afa40cb55804581770c0': number
+}
+
+type Category5 = {
+  '6630b96d64d8fa096524aa32': number
+  '6630b95d64d8fa096524aa31': number
+  '6630b94064d8fa096524aa2f': number
+  '6630b92364d8fa096524aa2d': number
+  '6630afa40cb55804581770c0': number
+}
+
+type CategoryMap = Category3 | Category5
 const options: SelectProps['options'] = [
   { label: 'mụn ẩn', value: 'mụn ẩn' },
   { label: 'mụn viêm', value: 'mụn viêm' },
@@ -128,7 +143,27 @@ export default function FormAI() {
   const handleCancel = () => {
     setIsModalVisible(false)
   }
+  const getCategoryStep = (category: keyof CategoryMap, productCount: keyof typeof any): number | '' => {
+    const categories: Record<string, Record<string, number>> = {
+      '3': {
+        '6630b96d64d8fa096524aa32': 1,
+        '6630b95d64d8fa096524aa31': 2,
+        '6630afa40cb55804581770c0': 3
+      },
+      '5': {
+        '6630b96d64d8fa096524aa32': 1,
+        '6630b95d64d8fa096524aa31': 2,
+        '6630b94064d8fa096524aa2f': 3,
+        '6630b92364d8fa096524aa2d': 4,
+        '6630afa40cb55804581770c0': 5
+      }
+    }
 
+    return categories[productCount.toString()]?.[category] || ''
+  }
+  const step1 = getCategoryStep('6630b96d64d8fa096524aa32', '3') // Returns 1
+
+  console.log(step1) // Output: 1
   return (
     <div className='rounded-md bg-white px-2 pb-10 shadow md:px-7 md:pb-20 font relative '>
       <div className='border-b border-b-gray-200 py-6 relative'>
@@ -325,20 +360,20 @@ export default function FormAI() {
                 <th className='px-4 py-2 text-center text-[12px]'>Công dụng</th>
               </tr>
             </thead>
-            {products.map((product, index) => (
-              <tbody key={index}>
-                <>
+            {products.map((product, index) => {
+              const step = getCategoryStep(product?.category as keyof CategoryMap, products.length.toString())
+
+              return (
+                <tbody key={index}>
                   <tr>
-                    <td className='px-4 py-2 text-center'>Bước {index + 1}</td>
+                    <td className='px-4 py-2 text-center'>Bước {step}</td>
                     <td className='px-4 py-2 text-center'>
                       <Image width={80} src={product?.image} style={{ borderRadius: '5px' }} />
                     </td>
-
                     <td className='py-2 text-start pl-10'>
-                      {' '}
                       <Link
                         to={`${path.home}${generateNameId({ name: product.name, id: product._id })}`}
-                        className=' h-[419px] font '
+                        className='h-[419px] font'
                         onClick={() => {
                           window.scrollTo(0, 0)
                         }}
@@ -348,10 +383,11 @@ export default function FormAI() {
                     </td>
                     <td className='px-4 py-2 text-start'>{product?.uses}</td>
                   </tr>
-                </>
-              </tbody>
-            ))}
+                </tbody>
+              )
+            })}
           </table>
+
           <div className='flex gap-[54px] px-2 mt-4 w-full items-center justify-center'>
             <div>
               <strong>

@@ -255,7 +255,7 @@ export default function FormAI() {
         <button
           onClick={() => showModal()}
           className=' text-gray-100  rounded-full bg-gradient-to-r from-[#f0a80edb] via-[#c43131d8] to-[#671f57d1] w-[140px] flex justify-center items-center p-3'
-          disabled={!localStorage.getItem('Id_form')}
+          disabled={localStorage.getItem('Id_form') }
         >
           Xem chi tiết
         </button>
